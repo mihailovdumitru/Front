@@ -1,0 +1,40 @@
+/*---- Error panel styling ---- */
+
+#errorPanel {
+    max-width: 900px;
+    min-width: 500px;
+    height: 80px;
+    background-color: #ffdbd7;
+    margin-top: 40px;
+    border-radius: 10px;
+    border: 1px solid red;
+}
+
+.errorMessage {
+    float: left;
+    padding-top: 30px;
+    padding-bottom: 26px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: "Source Sans Pro";
+    font-size: 16px;
+    color: #e74c3c;
+    width: auto;
+}
+
+#error-icon {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-top: 20px;
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+
+#cross-delete {
+    float: right;
+    margin-top: 32px;
+    padding-bottom: 32px;
+    padding-right: 24px;
+}
+
