@@ -1,4 +1,37 @@
 ﻿<header-component></header-component>
+
 <div class="container">
-    <h1> Salutare </h1>
+    <h1> Create the test </h1>
+    <form>
+        <mat-form-field>
+            <input-component label="Please enter the Question"
+                             width=700
+                             model="model.question" />
+        </mat-form-field>
+        <mat-form-field>
+            <input-component ng-repeat="answer in model.answers" label="Please enter the Answer"
+                             width=700
+                             model="answer.content" />
+        </mat-form-field>
+        <p>
+            <mat-form-field>
+                <primary-button-component text="Add answer" ng-click="addAnswer()"></primary-button-component>
+            </mat-form-field>
+        </p>
+        <!--<p>
+        <mat-form-field>
+            <textarea mdl-textfield placeholder="Textarea"></textarea>
+        </mat-form-field>
+        </p>
+        <mat-form-field>
+            <mat-select placeholder="Select">
+                <mat-option value="option">Option</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p>
+            <mat-form-field>
+                <primary-button-component text="Salut" ng-click="save()"></primary-button-component>
+            </mat-form-field>
+        </p>-->
+    </form>
 </div>

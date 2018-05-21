@@ -46,6 +46,7 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="src\pages\create-test\create-test.controller.js" />
+    <Content Include="src\pages\create-test\create-test.css" />
     <Content Include="src\pages\create-test\create-test.js" />
     <Content Include="src\pages\create-test\create-test.template.html" />
     <Content Include="src\services\create-test.service.js" />
