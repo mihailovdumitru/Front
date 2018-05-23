@@ -1,0 +1,17 @@
+.md-checkbox {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-bottom: 16px;
+    white-space: nowrap;
+    cursor: pointer;
+    outline: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    min-width: 20px;
+    min-height: 20px;
+    margin-left: 0;
+    margin-right: 16px;
+}

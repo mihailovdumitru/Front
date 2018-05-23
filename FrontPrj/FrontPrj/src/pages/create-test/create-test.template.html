@@ -2,23 +2,40 @@
 
 <div class="container">
     <h1> Create the test </h1>
-    <form>
-        <mat-form-field>
-            <input-component label="Please enter the Question"
-                             width=700
-                             model="model.question" />
-        </mat-form-field>
-        <mat-form-field>
-            <input-component ng-repeat="answer in model.answers" label="Please enter the Answer"
-                             width=700
-                             model="answer.content" />
-        </mat-form-field>
-        <p>
+    <div class="question" ng-show="showQuestion">
+        <form>
+
             <mat-form-field>
-                <primary-button-component text="Add answer" ng-click="addAnswer()"></primary-button-component>
+                <input-component label="Please enter the Question"
+                                 width=700
+                                 model="model.question" />
+
             </mat-form-field>
-        </p>
-        <!--<p>
+            <div class="Answers" ng-repeat="answer in model.answers">
+
+                <mat-form-field>
+                    <input-component label="Please enter the Answer"
+                                     width=700
+                                     model="answer.content" />
+                </mat-form-field>
+
+                <mat-form-field>
+                    <checkbox-component label="Correct answer" model="answer.correct"></checkbox-component>
+                </mat-form-field>
+            </div>
+            <p>
+                <mat-form-field>
+                    <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="addQuestion" text="Add question" ng-click="addQuestion(model.question, model.answers)"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
+                </mat-form-field>
+            </p>
+
+            <!--<p>
         <mat-form-field>
             <textarea mdl-textfield placeholder="Textarea"></textarea>
         </mat-form-field>
@@ -33,5 +50,29 @@
                 <primary-button-component text="Salut" ng-click="save()"></primary-button-component>
             </mat-form-field>
         </p>-->
-    </form>
+        </form>
+    </div>
+    <div class="TestPreview" ng-hide="showQuestion">
+        <form>
+            <div class="Question" ng-repeat="question in model.questions">
+
+                <mat-form-field>
+                    <input-component label="Question"
+                                     width=700
+                                     model="question.question" />
+                </mat-form-field>
+                <div class="Answers" ng-repeat="answer in question.answers">
+                    <mat-form-field>
+                        <input-component label="Answer"
+                                            width=700
+                                            model="answer.content" />
+
+                    </mat-form-field>
+                    <mat-form-field>
+                        <checkbox-component label="Correct answer" checked = "answer.correct" model="answer.correct"></checkbox-component>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

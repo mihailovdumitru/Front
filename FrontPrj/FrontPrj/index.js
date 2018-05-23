@@ -37,22 +37,3 @@ require('ui-router-extras');
 require('@pages/create-test/create-test.js');
 require('@root/src/services/create-test.service.js');
 
-
-
-//angular.module('app').config(function ($stateProvider) {
-//    $stateProvider
-//        .state('createTest', {
-//            parent: 'master',
-//            url: '/',
-//            requireToken: true,
-//            views: {
-//                'content@master': {
-//                    templateUrl: 'src/pages/create-test/create-test.template.html',
-//                    controller: 'CreateTestController',
-//                    controllerAs: 'ctrl'
-//                }
-//            }
-//        });
-
-//});
-

@@ -4,4 +4,5 @@ require('@components/primary-button/primary-button.js');
 require('@components/dropdown/dropdown.js');
 require('@components/popup/popup.js');
 require('@components/input/input.js');
+require('@components/checkbox/checkbox.js');
 // require('@pages/vacancies/vacancies-employee/vacancy-card-em/vacancy-card-em.js');

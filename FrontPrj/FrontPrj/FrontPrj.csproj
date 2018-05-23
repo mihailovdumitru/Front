@@ -45,6 +45,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="index.html" />
+    <Content Include="src\components\checkbox\checkbox-template.html" />
+    <Content Include="src\components\checkbox\checkbox.css" />
+    <Content Include="src\components\checkbox\checkbox.js" />
     <Content Include="src\pages\create-test\create-test.controller.js" />
     <Content Include="src\pages\create-test\create-test.css" />
     <Content Include="src\pages\create-test\create-test.js" />

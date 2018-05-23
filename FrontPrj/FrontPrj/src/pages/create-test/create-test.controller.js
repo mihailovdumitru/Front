@@ -6,13 +6,16 @@ angular
     .module('app')
     .controller(CONTROLLER_NAME, ['$scope', '$location', 'createTestService', ($scope, $location, createTestService) => {
         var ctrl = $scope;
+        ctrl.model = [];
+        ctrl.model.questions = [];
+        ctrl.showQuestion = true;
 
         init();
 
-        function init() {
-            ctrl.model = [];
+        function init() { 
             ctrl.model.question = "";
             ctrl.model.answers = [];
+            ctrl.model.answers.push({ content: "", correct: "" });
         }
 
         ctrl.save = function () {
@@ -20,8 +23,19 @@ angular
         }
 
         ctrl.addAnswer = function () {
-            ctrl.model.answers.push({ content: "" });
-            console.log(ctrl.model.answers);
+            ctrl.model.answers.push({ content: "", correct: ""});
+        }
+
+        ctrl.addQuestion = function(question, answers) {
+            //var clonedArray = answers.concat();
+            ctrl.model.questions.push({ question: question, answers: answers });
+            init();
+            
+        }
+
+        ctrl.showPreview = function() {
+            ctrl.showQuestion = false;
+            console.log(ctrl.model.questions);
         }
 
         $scope.showPopup = function () {
