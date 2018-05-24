@@ -54,12 +54,23 @@
     </div>
     <div class="TestPreview" ng-hide="showQuestion">
         <form>
+            <div id="selectors">
+                <mat-form-field>
+                    <dropdown-component id="studyProgram" data="1" name="Study program" width="150"></dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <dropdown-component id="studyYear" data="1" name="Year of study" width="150"></dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <dropdown-component id="discipline" data="1" name="Study discipline" width="150"></dropdown-component>
+                </mat-form-field>
+            </div>
             <div class="Question" ng-repeat="question in model.questions">
 
                 <mat-form-field>
                     <input-component label="Question"
-                                     width=700
-                                     model="question.question" />
+                                        width=700
+                                        model="question.question" />
                 </mat-form-field>
                 <div class="Answers" ng-repeat="answer in question.answers">
                     <mat-form-field>
@@ -69,10 +80,18 @@
 
                     </mat-form-field>
                     <mat-form-field>
-                        <checkbox-component label="Correct answer" checked = "answer.correct" model="answer.correct"></checkbox-component>
+                        <checkbox-component label="Correct answer" checked="answer.correct" model="answer.correct"></checkbox-component>
                     </mat-form-field>
                 </div>
             </div>
-        </form>
+            <p>
+                <mat-form-field>
+                    <primary-button-component id="saveAndSubmit" text="Save and Submit" ng-click="saveAndSubmit()"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="cancel" text="Cancel" ng-click="cancel()"></primary-button-component>
+                </mat-form-field>
+            </p>
+</form>
     </div>
 </div>

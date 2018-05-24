@@ -1,4 +1,9 @@
 ﻿.Question {
     border: 1px solid black;
-    margin:10px;
+    margin:20px;
+    border-radius:5px;
+}
+
+#selectors {
+    display: inline-block
 }

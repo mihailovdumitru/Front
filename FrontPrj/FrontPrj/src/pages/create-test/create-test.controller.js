@@ -4,7 +4,7 @@ const CONTROLLER_NAME = 'CreateTestController';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$scope', '$location', 'createTestService', ($scope, $location, createTestService) => {
+    .controller(CONTROLLER_NAME, ['$scope', '$location','$route', 'createTestService', ($scope, $location,$route, createTestService) => {
         var ctrl = $scope;
         ctrl.model = [];
         ctrl.model.questions = [];
@@ -36,6 +36,14 @@ angular
         ctrl.showPreview = function() {
             ctrl.showQuestion = false;
             console.log(ctrl.model.questions);
+        }
+
+        ctrl.saveAndSubmit = function () {
+            console.log(ctrl.model);
+        }
+
+        ctrl.cancel = function () {
+            $route.reload();
         }
 
         $scope.showPopup = function () {
