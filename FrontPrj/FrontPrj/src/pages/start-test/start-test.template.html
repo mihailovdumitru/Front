@@ -1,9 +1,40 @@
 ﻿<header-component></header-component>
 
 <div class="container">
-    <h1> Create the test </h1>
+    <h1> Start test </h1>
     <div class="question" ng-show="showQuestion">
         <form>
+            <div id="selectors">
+                <mat-form-field>
+                    <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <dropdown-component id="test" data="1" name="Test" width="150"></dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <dropdown-component id="class" data="1" name="Class" width="150"></dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="cancel" text="Generate Hashes" ng-click="cancel()"></primary-button-component>
+                </mat-form-field>
+            </div>
+            <p>
+                <textarea-component label="Authentication Hash Codes" width=500 rows=1 model="model.hashcodes"></textarea-component>
+            </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <mat-form-field>
                 <input-component label="Please enter the Question"
@@ -13,7 +44,7 @@
             </mat-form-field>
             <mat-form-field>
                 <input-component label="Points"
-                                 width=50
+                                 width=100
                                  model="model.points" />
 
             </mat-form-field>
@@ -74,7 +105,7 @@
                 </mat-form-field>
                 <mat-form-field>
                     <input-component label="Points"
-                                     width=50
+                                     width=100
                                      model="question.points" />
 
                 </mat-form-field>

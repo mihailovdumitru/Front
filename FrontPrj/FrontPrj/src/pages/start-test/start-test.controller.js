@@ -1,6 +1,6 @@
 ﻿import angular from 'angular';
 
-const CONTROLLER_NAME = 'CreateTestController';
+const CONTROLLER_NAME = 'StartTestController';
 
 angular
     .module('app')
@@ -17,6 +17,7 @@ angular
             ctrl.model.points = 0;
             ctrl.model.answers = [];
             ctrl.model.answers.push({ content: "", correct: "" });
+            ctrl.model.hashcodes = "";
         }
 
         ctrl.save = function () {

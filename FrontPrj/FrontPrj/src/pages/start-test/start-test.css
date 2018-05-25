@@ -1,0 +1,13 @@
+﻿.Question {
+    border: 1px solid black;
+    margin:20px;
+    border-radius:5px;
+}
+
+#selectors {
+    display: inline-block
+}
+
+textarea{
+    width:150px;
+}

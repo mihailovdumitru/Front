@@ -21,7 +21,6 @@ import '@root/node_modules/trix/dist/trix.js';
 
 angular
     .module('app', [
-        //'createTest',
         'ngAnimate',
         'ngMaterial',
         'ngMessages',
@@ -35,5 +34,6 @@ require('@components/all.js');
 require('angular-ui-router');
 require('ui-router-extras');
 require('@pages/create-test/create-test.js');
+require('@pages/start-test/start-test.js');
 require('@root/src/services/create-test.service.js');
 
