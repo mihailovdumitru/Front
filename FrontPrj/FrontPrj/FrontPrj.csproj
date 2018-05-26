@@ -44,7 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="index.html" />
     <Content Include="src\components\checkbox\checkbox-template.html" />
     <Content Include="src\components\checkbox\checkbox.css" />
     <Content Include="src\components\checkbox\checkbox.js" />

@@ -9,6 +9,7 @@ angular
         ctrl.model = [];
         ctrl.model.questions = [];
         ctrl.showQuestion = true;
+        ctrl.response = "";
 
         init();
 
@@ -24,12 +25,14 @@ angular
         }
 
         ctrl.addAnswer = function () {
-            ctrl.model.answers.push({ content: "", correct: ""});
+            ctrl.model.answers.push({ content: "", correct: "" });
+            createTestService.getValues(ctrl.response);
         }
 
         ctrl.addQuestion = function(question, answers, points) {
             ctrl.model.questions.push({ question: question, answers: answers, points:points });
             init();  
+            console.log(ctrl.response);
         }
 
         ctrl.showPreview = function() {

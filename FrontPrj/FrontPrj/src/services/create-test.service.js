@@ -7,6 +7,13 @@ angular.module('app')
         function ($http, $state) {
             var service = {};
 
+
+            service.getValues = function (values) {
+                $http.get('http://localhost:59009/api/values/6').then(function (response) {
+                        values = response.data;
+                    });
+            }
+
             service.getUserInfoForUserId = function () {
                 console.log("Dima");
             };
