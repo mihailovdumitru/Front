@@ -3,15 +3,18 @@
 const SERVICE_NAME = 'createTestService';
 
 angular.module('app')
-    .factory(SERVICE_NAME, ['$http', '$state', 
-        function ($http, $state) {
+    .factory(SERVICE_NAME, ['$http', '$state', 'createTestBaseUrl',
+        function ($http, $state, createTestBaseUrl) {
             var service = {};
 
 
-            service.getValues = function (values) {
-                $http.get('http://localhost:59009/api/values/6').then(function (response) {
-                        values = response.data;
-                    });
+            service.getValues = function () {
+                return $http.get(createTestBaseUrl + "CreateTest/6");
+            }
+
+            service.insertTest = function (params) {
+                console.log(params);
+                return $http.post(createTestBaseUrl + "CreateTest", params);
             }
 
             service.getUserInfoForUserId = function () {

@@ -18,9 +18,11 @@ import '@root/node_modules/angular-animate/angular-animate.js';
 import '@root/node_modules/angular-material/angular-material.js';
 import '@root/node_modules/angular-messages/angular-messages.js';
 import '@root/node_modules/trix/dist/trix.js';
+import '@root/src/app.constants.js';
 
 angular
     .module('app', [
+        'constants',
         'ngAnimate',
         'ngMaterial',
         'ngMessages',

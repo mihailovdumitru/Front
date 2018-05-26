@@ -10,6 +10,7 @@ angular
         ctrl.model.questions = [];
         ctrl.showQuestion = true;
         ctrl.response = "";
+        var test = {};
 
         init();
 
@@ -18,6 +19,7 @@ angular
             ctrl.model.points = 0;
             ctrl.model.answers = [];
             ctrl.model.answers.push({ content: "", correct: "" });
+            ctrl.model.lecture = "PSBD";
         }
 
         ctrl.save = function () {
@@ -26,22 +28,27 @@ angular
 
         ctrl.addAnswer = function () {
             ctrl.model.answers.push({ content: "", correct: "" });
-            createTestService.getValues(ctrl.response);
+            createTestService.getValues().then(function (values) {
+                ctrl.response = values.data;
+            });
         }
 
         ctrl.addQuestion = function(question, answers, points) {
             ctrl.model.questions.push({ question: question, answers: answers, points:points });
             init();  
-            console.log(ctrl.response);
+            //console.log(ctrl.response);
         }
 
         ctrl.showPreview = function() {
             ctrl.showQuestion = false;
-            console.log(ctrl.model.questions);
+            //console.log(ctrl.model.questions);
+            console.log(ctrl.model);
         }
 
         ctrl.saveAndSubmit = function () {
-            console.log(ctrl.model);
+            test.lecture = ctrl.model.lecture;
+            test.questions = ctrl.model.questions;
+            createTestService.insertTest(test);
         }
 
         ctrl.cancel = function () {
