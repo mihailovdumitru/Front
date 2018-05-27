@@ -33,8 +33,9 @@ angular
             });
         }
 
-        ctrl.addQuestion = function(question, answers, points) {
-            ctrl.model.questions.push({ question: question, answers: answers, points:points });
+        ctrl.addQuestion = function (question, answers, points) {
+            var questionObj = { content: question, points: points };
+            ctrl.model.questions.push({ question: questionObj, answers: answers});
             init();  
             //console.log(ctrl.response);
         }
