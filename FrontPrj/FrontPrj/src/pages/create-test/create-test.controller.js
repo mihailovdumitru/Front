@@ -9,6 +9,7 @@ angular
         ctrl.model = [];
         ctrl.model.questions = [];
         ctrl.showQuestion = true;
+        ctrl.model.testNaming = "";
         ctrl.response = "";
         var test = {};
 
@@ -18,7 +19,7 @@ angular
             ctrl.model.question = "";
             ctrl.model.points = 0;
             ctrl.model.answers = [];
-            ctrl.model.answers.push({ content: "", correct: "" });
+            ctrl.model.answers.push({ content: "", correct: false });
             ctrl.model.lecture = "PSBD";
         }
 
@@ -27,14 +28,14 @@ angular
         }
 
         ctrl.addAnswer = function () {
-            ctrl.model.answers.push({ content: "", correct: "" });
+            ctrl.model.answers.push({ content: "", correct: false });
             createTestService.getValues().then(function (values) {
                 ctrl.response = values.data;
             });
         }
 
         ctrl.addQuestion = function (question, answers, points) {
-            var questionObj = { content: question, points: points };
+            var questionObj = { content: question, points: points};
             ctrl.model.questions.push({ question: questionObj, answers: answers});
             init();  
             //console.log(ctrl.response);
@@ -47,6 +48,7 @@ angular
         }
 
         ctrl.saveAndSubmit = function () {
+            test.naming = ctrl.model.testNaming;
             test.lecture = ctrl.model.lecture;
             test.questions = ctrl.model.questions;
             createTestService.insertTest(test);

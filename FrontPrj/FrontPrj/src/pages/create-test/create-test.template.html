@@ -63,18 +63,23 @@
                 <mat-form-field>
                     <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
                 </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Test naming"
+                                     width=350
+                                     model="model.testNaming" />
+                </mat-form-field>
             </div>
             <div class="Question" ng-repeat="question in model.questions">
 
                 <mat-form-field>
                     <input-component label="Question"
                                      width=700
-                                     model="question.question" />
+                                     model="question.question.content" />
                 </mat-form-field>
                 <mat-form-field>
                     <input-component label="Points"
                                      width=50
-                                     model="question.points" />
+                                     model="question.question.points" />
 
                 </mat-form-field>
                 <div class="Answers" ng-repeat="answer in question.answers">
