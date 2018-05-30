@@ -1,0 +1,9 @@
+<div class="md-padding" ng-cloak layout="column">
+    <md-input-container ng-style="{width: {{$ctrl.width}} + 'px'}">
+        <label>{{$ctrl.label}}</label>
+        <md-select ng-model="selectedElements" multiple>
+            <md-option ng-value="element.value" ng-repeat="element in $ctrl.data track by $index" ng-click="">{{element.text}}</md-option>
+        </md-select>
+    </md-input-container>
+</div>
+

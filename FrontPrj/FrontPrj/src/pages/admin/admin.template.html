@@ -1,0 +1,255 @@
+﻿<header-component></header-component>
+
+<div class="container">
+    <h1> Admin </h1>
+    <p>Selected Value: <span class="radioValue">{{ selectedRadio }}</span> </p>
+    <div layout="column" style="height:500px; " ng-cloak>
+
+        <section layout="row" flex>
+
+            <md-sidenav class="md-sidenav-left"
+                        md-component-id="left"
+                        md-is-locked-open="$mdMedia('gt-md')"
+                        md-whiteframe="4">
+
+                <md-toolbar class="md-theme-indigo">
+                    <div class="selectPage">
+                        <md-radio-group ng-model="selectedRadio">
+                            <radio-component label="Teachers" 
+                                             model="Teachers">
+                            </radio-component>
+                            <radio-component label="Students" 
+                                             model="Students">
+                            </radio-component>
+                            <radio-component label="Lectures" 
+                                             model="Lectures">
+                            </radio-component>
+                            <radio-component label="Classes" 
+                                             model="Classes">
+                            </radio-component>
+                        </md-radio-group>
+                    </div>
+                </md-toolbar>
+                <md-content layout-padding>
+                    <div class="TeachersDrop" ng-if="selectedRadio=='Teachers'">
+                        <dropdown-component id="teacher"
+                                            data="dropdownData"
+                                            option="teacher"
+                                            name="Teacher"
+                                            width="250">
+                        </dropdown-component>
+                    </div>
+                    <div class="StudentsDrop" ng-if="selectedRadio=='Students'">
+                        <dropdown-component id="studyClass"
+                                            data="dropdownData"
+                                            option="class"
+                                            name="Class"
+                                            width="250">
+                        </dropdown-component>
+                        <dropdown-component ng-if="selectedRadio=='Students'"
+                                            id="student"
+                                            data="dropdownData"
+                                            option="student"
+                                            name="Student"
+                                            width="250">
+                        </dropdown-component>
+                    </div>
+                    <div class="LecturesDrop" ng-if="selectedRadio=='Lectures'">
+                        <dropdown-component id="lectures"
+                                            data="dropdownData"
+                                            option="lecture"
+                                            name="Lecture"
+                                            width="250">
+                        </dropdown-component>
+                        <dropdown-component ng-if="selectedRadio=='Students'"
+                                            id="student"
+                                            data="dropdownData"
+                                            option="student"
+                                            name="Student"
+                                            width="250">
+                        </dropdown-component>
+                    </div>
+                    <br />
+
+
+
+                    <primary-button-component id="addQuestion"
+                                              text="Add"
+                                              ng-click="addQuestion(model.question, model.answers, model.points)">
+                    </primary-button-component>
+                    <primary-button-component id="addQuestion"
+                                              text="Delete"
+                                              ng-click="addQuestion(model.question, model.answers, model.points)">
+                    </primary-button-component>
+                    <primary-button-component id="addQuestion"
+                                              text="Save"
+                                              ng-click="addQuestion(model.question, model.answers, model.points)">
+                    </primary-button-component>
+                </md-content>
+
+            </md-sidenav>
+
+            <md-content flex layout-padding>
+                <div class="Teacher" layout="column" layout-align="top center" ng-if="(selectedRadio=='Teachers') || (selectedRadio=='Students')">
+                    <div>
+                        <input-component label="First Name"
+                                         width=250
+                                         model="person.firstName" />
+                    </div>
+                    <div>
+                        <input-component label="Last Name"
+                                         width=250
+                                         model="person.lastName" />
+                    </div>
+                    <div>
+                        <input-component label="Email"
+                                         width=250
+                                         model="person.email" />
+                    </div>
+                    <div ng-if="selectedRadio=='Teachers'">
+                        <dropdown-multiple-select-component id="lecture"
+                                                            label="Lectures"
+                                                            selectedElements="Lectures"
+                                                            option="1"
+                                                            name="Lecture"
+                                                            width=250
+                                                            data="dropdownData">
+                        </dropdown-multiple-select-component>
+                    </div>
+                </div>
+
+
+
+                <div class="Lectures" layout="column" layout-align="top center" ng-if="selectedRadio=='Lectures'">
+                    <div>
+                        <input-component label="Name"
+                                         width=250
+                                         model="lecture.name" />
+                    </div>
+                    <div>
+                        <dropdown-component id="yearOfStudy"
+                                            data="studyYears"
+                                            option="lecture.yearOfStudy"
+                                            name="Year of Study"
+                                            width="250">
+                        </dropdown-component>
+                    </div>
+                </div>
+
+                <div class="Classes" layout="column" layout-align="top center" ng-if="selectedRadio=='Classes'">
+                    <div>
+                        <input-component label="Class Name"
+                                         width=250
+                                         model="class.name" />
+                    </div>
+                </div>
+
+                <div flex></div>
+
+            </md-content>
+
+        </section>
+
+    </div>
+
+        <!--<div class="question" ng-show="showQuestion">
+        <form>
+            <mat-form-field>
+                <input-component label="Please enter the Question"
+                                 width=700
+                                 model="model.question" />
+
+            </mat-form-field>
+            <mat-form-field>
+                <input-component label="Points"
+                                 width=50
+                                 model="model.points" />
+
+            </mat-form-field>
+            <div class="Answers" ng-repeat="answer in model.answers">
+
+                <mat-form-field>
+                    <input-component label="Please enter the Answer"
+                                     width=700
+                                     model="answer.content" />
+                </mat-form-field>
+
+                <mat-form-field>
+                    <checkbox-component label="Correct answer" model="answer.correct"></checkbox-component>
+                </mat-form-field>
+            </div>
+            <p>
+                <mat-form-field>
+                    <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="addQuestion" text="Add question" ng-click="addQuestion(model.question, model.answers, model.points)"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>-->
+        <!--<p>
+    <mat-form-field>
+        <textarea mdl-textfield placeholder="Textarea"></textarea>
+    </mat-form-field>
+    </p>
+    <mat-form-field>
+        <mat-select placeholder="Select">
+            <mat-option value="option">Option</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <p>
+        <mat-form-field>
+            <primary-button-component text="Salut" ng-click="save()"></primary-button-component>
+        </mat-form-field>
+    </p>-->
+        <!--<div class="TestPreview" ng-hide="showQuestion">
+        <form>
+            <div id="selectors">
+                <mat-form-field>
+                    <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Test naming"
+                                     width=350
+                                     model="model.testNaming" />
+                </mat-form-field>
+            </div>
+            <div class="Question" ng-repeat="question in model.questions">
+
+                <mat-form-field>
+                    <input-component label="Question"
+                                     width=700
+                                     model="question.question.content" />
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Points"
+                                     width=50
+                                     model="question.question.points" />
+
+                </mat-form-field>
+                <div class="Answers" ng-repeat="answer in question.answers">
+                    <mat-form-field>
+                        <input-component label="Answer"
+                                         width=700
+                                         model="answer.content" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <checkbox-component label="Correct answer" checked="answer.correct" model="answer.correct"></checkbox-component>
+                    </mat-form-field>
+                </div>
+            </div>
+            <p>
+                <mat-form-field>
+                    <primary-button-component id="saveAndSubmit" text="Save and Submit" ng-click="saveAndSubmit()"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="cancel" text="Cancel" ng-click="cancel()"></primary-button-component>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>-->
+    </div>

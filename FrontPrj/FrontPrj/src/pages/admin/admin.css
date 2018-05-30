@@ -1,0 +1,17 @@
+﻿md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+background-color:cornflowerblue;
+}
+
+md-sidenav {
+    width: 500px;
+    max-width:none;
+}
+
+md-radio-group{
+    font-size: 16px;
+}
+
+.selectPage {
+    padding-top: 10px;
+    padding-left:40px;
+}

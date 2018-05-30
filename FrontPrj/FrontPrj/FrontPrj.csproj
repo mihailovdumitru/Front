@@ -48,9 +48,15 @@
     <Content Include="src\components\checkbox\checkbox-template.html" />
     <Content Include="src\components\checkbox\checkbox.css" />
     <Content Include="src\components\checkbox\checkbox.js" />
+    <Content Include="src\components\dropdown-multiple-select\dropdown-multiple-select.css" />
+    <Content Include="src\components\dropdown-multiple-select\dropdown-multiple-select.template.html" />
+    <Content Include="src\components\dropdown-multiple-select\dropdown-multiple-select.js" />
+    <Content Include="src\components\radio-button\radio-button.js" />
+    <Content Include="src\components\radio-button\radio-button.template.html" />
     <Content Include="src\components\textarea\textarea-template.html" />
     <Content Include="src\components\textarea\textarea.css" />
     <Content Include="src\components\textarea\textarea.js" />
+    <Content Include="src\pages\admin\admin.controller.js" />
     <Content Include="src\pages\create-test\create-test.controller.js" />
     <Content Include="src\pages\create-test\create-test.css" />
     <Content Include="src\pages\create-test\create-test.js" />
@@ -59,10 +65,14 @@
     <Content Include="src\pages\start-test\start-test.css" />
     <Content Include="src\pages\start-test\start-test.js" />
     <Content Include="src\pages\start-test\start-test.template.html" />
+    <Content Include="src\pages\admin\admin.css" />
+    <Content Include="src\pages\admin\admin.js" />
+    <Content Include="src\pages\admin\admin.template.html" />
     <Content Include="src\services\create-test.service.js" />
     <Content Include="webpack.config.js" />
     <None Include="packages.config" />
     <Content Include="index.js" />
+    <Content Include="src\components\radio-button\radio-button.css" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

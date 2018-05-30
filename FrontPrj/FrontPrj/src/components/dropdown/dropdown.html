@@ -1,7 +1,7 @@
 <div class="md-padding" ng-cloak layout="column">
     <md-card-content>
       <div layout="row" layout-align="space-between center" >
-        <md-select ng-model = $ctrl.option placeholder={{$ctrl.name}} class="md-no-underline" ng-style="{height: {{$ctrl.height}} + 'px', width: {{$ctrl.width}} + 'px'}">
+        <md-select ng-model = "option" placeholder={{$ctrl.name}} class="md-no-underline" ng-style="{height: {{$ctrl.height}} + 'px', width: {{$ctrl.width}} + 'px'}">
           <md-option value="{{element.value}}" ng-repeat="element in $ctrl.data track by $index">{{element.text}}</md-option>
         </md-select>
       </div>
