@@ -4,13 +4,15 @@ const CONTROLLER_NAME = 'CreateTestController';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$scope', '$location','$route', 'createTestService', ($scope, $location,$route, createTestService) => {
+    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', 'createTestService', 'entitiesService', ($scope, $location, $route, createTestService, entitiesService) => {
         var ctrl = $scope;
         ctrl.model = [];
         ctrl.model.questions = [];
         ctrl.showQuestion = true;
         ctrl.model.testNaming = "";
         ctrl.response = "";
+
+
         var test = {};
 
         ctrl.dropdownData = [{ value: 1, text: "Ddddddddddddddddddddima" }, { value: 2, text: "Jaddddddddddddddddnea" }, { value: 3, text: "Emilddddddddddddddddddddddddddd" }];
@@ -27,7 +29,24 @@ angular
             ctrl.model.answers = [];
             ctrl.model.answers.push({ content: "", correct: false });
             ctrl.model.lecture = "PSBD";
+            ctrl.lecture = {};
+            ctrl.lecture.name = "";
+            ctrl.lecture.yearOfStudy = "";
+            ctrl.class = {};
+            ctrl.class.name = "";
+            ctrl.classes = {};
         }
+
+        ctrl.getSchemesDetails = function () {
+            entitiesService.getClasses().then(function (response) {
+                if (response.data) {
+                    ctrl.classes = response.data;
+                }
+            });
+        };
+
+
+        ctrl.getSchemesDetails();
 
         ctrl.click = function () {
 
@@ -49,6 +68,26 @@ angular
             ctrl.model.questions.push({ question: questionObj, answers: answers});
             init();  
             //console.log(ctrl.response);
+        }
+
+        ctrl.add = function (selectedRadio) {
+            if (selectedRadio == 'Lectures') {
+                ctrl.insertLecture(ctrl.lecture);
+            }
+            else if (selectedRadio == 'Classes') {
+                ctrl.insertClass(ctrl.class);
+            }
+
+            console.log(selectedRadio);
+        }
+
+        ctrl.insertClass = function (studyClass) {
+            entitiesService.insertClass(studyClass);
+        }
+
+
+        ctrl.insertLecture = function (lecture) {
+            entitiesService.insertLecture(lecture);
         }
 
         ctrl.showPreview = function() {

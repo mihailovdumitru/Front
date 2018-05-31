@@ -38,5 +38,6 @@ require('ui-router-extras');
 require('@pages/create-test/create-test.js');
 require('@pages/admin/admin.js');
 require('@root/src/services/create-test.service.js');
+require('@root/src/services/entities.service.js');
 
 

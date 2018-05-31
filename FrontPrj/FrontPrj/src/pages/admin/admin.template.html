@@ -15,16 +15,16 @@
                 <md-toolbar class="md-theme-indigo">
                     <div class="selectPage">
                         <md-radio-group ng-model="selectedRadio">
-                            <radio-component label="Teachers" 
+                            <radio-component label="Teachers"
                                              model="Teachers">
                             </radio-component>
-                            <radio-component label="Students" 
+                            <radio-component label="Students"
                                              model="Students">
                             </radio-component>
-                            <radio-component label="Lectures" 
+                            <radio-component label="Lectures"
                                              model="Lectures">
                             </radio-component>
-                            <radio-component label="Classes" 
+                            <radio-component label="Classes"
                                              model="Classes">
                             </radio-component>
                         </md-radio-group>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="StudentsDrop" ng-if="selectedRadio=='Students'">
                         <dropdown-component id="studyClass"
-                                            data="dropdownData"
+                                            data="classes"
                                             option="class"
                                             name="Class"
                                             width="250">
@@ -71,11 +71,9 @@
                     </div>
                     <br />
 
-
-
-                    <primary-button-component id="addQuestion"
+                    <primary-button-component id="addElement"
                                               text="Add"
-                                              ng-click="addQuestion(model.question, model.answers, model.points)">
+                                              ng-click="add(selectedRadio)">
                     </primary-button-component>
                     <primary-button-component id="addQuestion"
                                               text="Delete"
@@ -91,6 +89,7 @@
 
             <md-content flex layout-padding>
                 <div class="Teacher" layout="column" layout-align="top center" ng-if="(selectedRadio=='Teachers') || (selectedRadio=='Students')">
+                    <p>Selected Value: <span class="radioValue">{{ Lectures }}</span> </p>
                     <div>
                         <input-component label="First Name"
                                          width=250
@@ -121,6 +120,7 @@
 
 
                 <div class="Lectures" layout="column" layout-align="top center" ng-if="selectedRadio=='Lectures'">
+                    <p>Selected Value: <span class="radioValue">{{ lecture.yearOfStudy }}</span> </p>
                     <div>
                         <input-component label="Name"
                                          width=250
@@ -151,105 +151,4 @@
         </section>
 
     </div>
-
-        <!--<div class="question" ng-show="showQuestion">
-        <form>
-            <mat-form-field>
-                <input-component label="Please enter the Question"
-                                 width=700
-                                 model="model.question" />
-
-            </mat-form-field>
-            <mat-form-field>
-                <input-component label="Points"
-                                 width=50
-                                 model="model.points" />
-
-            </mat-form-field>
-            <div class="Answers" ng-repeat="answer in model.answers">
-
-                <mat-form-field>
-                    <input-component label="Please enter the Answer"
-                                     width=700
-                                     model="answer.content" />
-                </mat-form-field>
-
-                <mat-form-field>
-                    <checkbox-component label="Correct answer" model="answer.correct"></checkbox-component>
-                </mat-form-field>
-            </div>
-            <p>
-                <mat-form-field>
-                    <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="addQuestion" text="Add question" ng-click="addQuestion(model.question, model.answers, model.points)"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
-                </mat-form-field>
-            </p>
-        </form>
-    </div>-->
-        <!--<p>
-    <mat-form-field>
-        <textarea mdl-textfield placeholder="Textarea"></textarea>
-    </mat-form-field>
-    </p>
-    <mat-form-field>
-        <mat-select placeholder="Select">
-            <mat-option value="option">Option</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <p>
-        <mat-form-field>
-            <primary-button-component text="Salut" ng-click="save()"></primary-button-component>
-        </mat-form-field>
-    </p>-->
-        <!--<div class="TestPreview" ng-hide="showQuestion">
-        <form>
-            <div id="selectors">
-                <mat-form-field>
-                    <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <input-component label="Test naming"
-                                     width=350
-                                     model="model.testNaming" />
-                </mat-form-field>
-            </div>
-            <div class="Question" ng-repeat="question in model.questions">
-
-                <mat-form-field>
-                    <input-component label="Question"
-                                     width=700
-                                     model="question.question.content" />
-                </mat-form-field>
-                <mat-form-field>
-                    <input-component label="Points"
-                                     width=50
-                                     model="question.question.points" />
-
-                </mat-form-field>
-                <div class="Answers" ng-repeat="answer in question.answers">
-                    <mat-form-field>
-                        <input-component label="Answer"
-                                         width=700
-                                         model="answer.content" />
-                    </mat-form-field>
-                    <mat-form-field>
-                        <checkbox-component label="Correct answer" checked="answer.correct" model="answer.correct"></checkbox-component>
-                    </mat-form-field>
-                </div>
-            </div>
-            <p>
-                <mat-form-field>
-                    <primary-button-component id="saveAndSubmit" text="Save and Submit" ng-click="saveAndSubmit()"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="cancel" text="Cancel" ng-click="cancel()"></primary-button-component>
-                </mat-form-field>
-            </p>
-        </form>
-    </div>-->
-    </div>
+</div>
