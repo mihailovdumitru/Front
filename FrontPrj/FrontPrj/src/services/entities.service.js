@@ -7,13 +7,12 @@ angular.module('app')
         function ($http, $state, createTestBaseUrl, apiBaseUrl) {
             var service = {};
 
-            service.insertTest = function (test) {
-                console.log(test);
-                return $http.post(createTestBaseUrl + "CreateTest", test);
-            }
-
             service.insertLecture = function (lecture) {
                 return $http.post(apiBaseUrl + "Lectures", lecture);
+            }
+
+            service.getLectures = function () {
+                return $http.get(apiBaseUrl + "Lectures");
             }
 
             service.insertClass = function (studyClass) {
@@ -23,6 +22,19 @@ angular.module('app')
             service.getClasses = function () {
                 return $http.get(apiBaseUrl + "Classes");
             }
+
+            service.insertStudent = function (student) {
+                return $http.post(apiBaseUrl + "Students", student);
+            }
+
+            service.getStudents = function (student) {
+                return $http.get(apiBaseUrl + "Students");
+            }
+
+            service.insertTeacher = function (teacher) {
+                return $http.post(apiBaseUrl + "Teachers", teacher);
+            }
+
 
             service.getUserInfoForUserId = function () {
                 console.log("Dima");
