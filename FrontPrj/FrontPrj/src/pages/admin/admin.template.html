@@ -2,7 +2,7 @@
 
 <div class="container" ng-controller="AdminController as ctrl">
     <h1> Admin </h1>
-    <p>Selected Value: <span class="radioValue">{{ selectedRadio }}</span> </p>
+    <p>Selected Value: <span class="radioValue">{{ radio.selectedRadio }}</span> </p>
     <div layout="column" style="height:500px; " ng-cloak>
 
         <section layout="row" flex>
@@ -14,7 +14,7 @@
 
                 <md-toolbar class="md-theme-indigo">
                     <div class="selectPage">
-                        <md-radio-group ng-model="selectedRadio">
+                        <md-radio-group ng-model="radio.selectedRadio">
                             <radio-component label="Teachers"
                                              model="Teachers">
                             </radio-component>
@@ -31,23 +31,24 @@
                     </div>
                 </md-toolbar>
                 <md-content layout-padding>
-                    <div class="TeachersDrop" ng-if="selectedRadio=='Teachers'">
+                    <div class="TeachersDrop" ng-if="radio.selectedRadio=='Teachers'">
                         <dropdown-component id="teacher"
-                                            data="dropdownData"
-                                            option="teacher"
+                                            data="dropDownTeachers"
+                                            option="person.teacherID"
                                             name="Teacher"
                                             width="250">
                         </dropdown-component>
                     </div>
-                    <div class="StudentsDrop" ng-if="selectedRadio=='Students'" >
+                    <div class="StudentsDrop" ng-if="radio.selectedRadio=='Students'">
                         <p>Selected Value: <span class="radioValue">{{ person.studentID }}</span> </p>
                         <dropdown-component id="studyClass"
                                             data="dropDownClasses"
                                             option="person.classID"
                                             name="Class"
-                                            width="250">
-                        </dropdown-component>
-                        <dropdown-component ng-if="selectedRadio=='Students'"
+                                            width="250"
+                                            required>
+                        </dropdown-component><br/>
+                        <dropdown-component ng-if="radio.selectedRadio=='Students'"
                                             id="student"
                                             data="dropDownStudents"
                                             option="person.studentID"
@@ -55,41 +56,46 @@
                                             width="250">
                         </dropdown-component>
                     </div>
-                    <div class="LecturesDrop" ng-if="selectedRadio=='Lectures'">
-                        <dropdown-component id="lectures"
-                                            data="dropdownData"
-                                            option="lecture"
+                    <div class="LecturesDrop" ng-if="radio.selectedRadio=='Lectures'">
+                        <dropdown-component id="lecturesComponent"
+                                            data="dropDownLectures"
+                                            option="lecture.lectureID"
                                             name="Lecture"
                                             width="250">
                         </dropdown-component>
-                        <dropdown-component ng-if="selectedRadio=='Students'"
-                                            id="student"
-                                            data="dropdownData"
-                                            option="student"
-                                            name="Student"
+                    </div>
+                    <div class="ClassesDrop" ng-if="radio.selectedRadio=='Classes'">
+                        <dropdown-component id="classesComponent"
+                                            data="dropDownClasses"
+                                            option="class.classID"
+                                            name="Classes"
                                             width="250">
                         </dropdown-component>
                     </div>
                     <br />
 
                     <primary-button-component id="addElement"
-                                              text="Add"
-                                              ng-click="add(selectedRadio)">
+                                              text="New"
+                                              ng-click="new()">
                     </primary-button-component>
                     <primary-button-component id="addQuestion"
                                               text="Delete"
-                                              ng-click="deleteElement(selectedRadio)">
+                                              ng-click="deleteElement(radio.selectedRadio)">
+                    </primary-button-component>
+                    <primary-button-component id="refresh"
+                                              text="Refresh"
+                                              ng-click="refresh()">
                     </primary-button-component>
                     <primary-button-component id="addQuestion"
                                               text="Save"
-                                              ng-click="addQuestion(model.question, model.answers, model.points)">
+                                              ng-click="save(radio.selectedRadio)">
                     </primary-button-component>
                 </md-content>
 
             </md-sidenav>
 
             <md-content flex layout-padding>
-                <div class="Teacher" layout="column" layout-align="top center" ng-if="(selectedRadio=='Teachers') || (selectedRadio=='Students')">
+                <div class="Teacher" layout="column" layout-align="top center" ng-if="(radio.selectedRadio=='Teachers') || (radio.selectedRadio=='Students')">
                     <p>Selected Value: <span class="radioValue">{{ Lectures }}</span> </p>
                     <div>
                         <input-component label="First Name"
@@ -106,7 +112,7 @@
                                          width=250
                                          model="person.email" />
                     </div>
-                    <div ng-if="selectedRadio=='Teachers'">
+                    <div ng-if="radio.selectedRadio=='Teachers'">
                         <dropdown-multiple-select-component id="lecture"
                                                             label="Lectures"
                                                             option="person.lectures"
@@ -119,7 +125,7 @@
 
 
 
-                <div class="Lectures" layout="column" layout-align="top center" ng-if="selectedRadio=='Lectures'">
+                <div class="Lectures" layout="column" layout-align="top center" ng-if="radio.selectedRadio=='Lectures'">
                     <p>Selected Value: <span class="radioValue">{{ lecture.yearOfStudy }}</span> </p>
                     <div>
                         <input-component label="Name"
@@ -136,7 +142,7 @@
                     </div>
                 </div>
 
-                <div class="Classes" layout="column" layout-align="top center" ng-if="selectedRadio=='Classes'">
+                <div class="Classes" layout="column" layout-align="top center" ng-if="radio.selectedRadio=='Classes'">
                     <div>
                         <input-component label="Class Name"
                                          width=250

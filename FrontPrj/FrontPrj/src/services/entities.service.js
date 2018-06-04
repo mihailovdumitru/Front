@@ -15,6 +15,10 @@ angular.module('app')
                 return $http.get(apiBaseUrl + "Lectures");
             }
 
+            service.updateLecture = function (lecture, lectureID) {
+                return $http.put(apiBaseUrl + "Lectures/" + lectureID, lecture);
+            }
+
             service.insertClass = function (studyClass) {
                 return $http.post(apiBaseUrl + "Classes", studyClass);
             }
@@ -23,8 +27,16 @@ angular.module('app')
                 return $http.get(apiBaseUrl + "Classes");
             }
 
+            service.updateClass = function (studyClass, classID) {
+                return $http.put(apiBaseUrl + "Classes/" + classID, studyClass);
+            }
+
             service.insertStudent = function (student) {
                 return $http.post(apiBaseUrl + "Students", student);
+            }
+
+            service.updateStudent = function (student, studentID) {
+                return $http.put(apiBaseUrl + "Students/" + studentID, student);
             }
 
             service.getStudents = function (student) {
@@ -34,6 +46,16 @@ angular.module('app')
             service.insertTeacher = function (teacher) {
                 return $http.post(apiBaseUrl + "Teachers", teacher);
             }
+
+            service.getTeachers = function () {
+                return $http.get(apiBaseUrl + "Teachers");
+            }
+
+            service.updateTeacher = function (teacher, teacherID) {
+                return $http.put(apiBaseUrl + "Teachers/" + teacherID, teacher);
+            }
+
+
 
 
             service.getUserInfoForUserId = function () {

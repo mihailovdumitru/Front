@@ -3,7 +3,7 @@ background-color:cornflowerblue;
 }
 
 md-sidenav {
-    width: 500px;
+    width: 550px;
     max-width:none;
 }
 
@@ -12,6 +12,6 @@ md-radio-group{
 }
 
 .selectPage {
-    padding-top: 10px;
+    padding-top: 15px;
     padding-left:40px;
 }
