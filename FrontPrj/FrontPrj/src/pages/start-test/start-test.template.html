@@ -3,131 +3,49 @@
 <div class="container">
     <h1> Start test </h1>
     <div class="question" ng-show="showQuestion">
-        <form>
-            <div id="selectors">
-                <mat-form-field>
-                    <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <dropdown-component id="test" data="1" name="Test" width="150"></dropdown-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <dropdown-component id="class" data="1" name="Class" width="150"></dropdown-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="cancel" text="Generate Hashes" ng-click="cancel()"></primary-button-component>
-                </mat-form-field>
-            </div>
-            <p>
-                <textarea-component label="Authentication Hash Codes" width=500 rows=1 model="model.hashcodes"></textarea-component>
-            </p>
+        <div id="selectors">
+            <dropdown-component id="lecture"
+                                data="dropDownLectures"
+                                option="model.lectureID"
+                                name="Lecture"
+                                width="300">
+            </dropdown-component>
+            <dropdown-component id="test"
+                                data="dropDownTests"
+                                option="model.testID"
+                                name="Test"
+                                width="300">
+            </dropdown-component>
+            <dropdown-component id="class"
+                                data="dropDownStudyClasses"
+                                option="model.classID"
+                                name="Class"
+                                width="150">
+            </dropdown-component>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
+        <div>
             <mat-form-field>
-                <input-component label="Please enter the Question"
-                                 width=700
-                                 model="model.question" />
-
-            </mat-form-field>
-            <mat-form-field>
-                <input-component label="Points"
+                <input-component label="Duration (min)"
                                  width=100
-                                 model="model.points" />
-
+                                 model="model.duration" />
             </mat-form-field>
-            <div class="Answers" ng-repeat="answer in model.answers">
-
-                <mat-form-field>
-                    <input-component label="Please enter the Answer"
-                                     width=700
-                                     model="answer.content" />
-                </mat-form-field>
-
-                <mat-form-field>
-                    <checkbox-component label="Correct answer" model="answer.correct"></checkbox-component>
-                </mat-form-field>
-            </div>
-            <p>
-                <mat-form-field>
-                    <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="addQuestion" text="Add question" ng-click="addQuestion(model.question, model.answers, model.points)"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
-                </mat-form-field>
-            </p>
-
-            <!--<p>
-    <mat-form-field>
-        <textarea mdl-textfield placeholder="Textarea"></textarea>
-    </mat-form-field>
-    </p>
-    <mat-form-field>
-        <mat-select placeholder="Select">
-            <mat-option value="option">Option</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <p>
-        <mat-form-field>
-            <primary-button-component text="Salut" ng-click="save()"></primary-button-component>
-        </mat-form-field>
-    </p>-->
-        </form>
-    </div>
-    <div class="TestPreview" ng-hide="showQuestion">
-        <form>
-            <div id="selectors">
-                <mat-form-field>
-                    <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
-                </mat-form-field>
-            </div>
-            <div class="Question" ng-repeat="question in model.questions">
-
-                <mat-form-field>
-                    <input-component label="Question"
-                                     width=700
-                                     model="question.question" />
-                </mat-form-field>
-                <mat-form-field>
-                    <input-component label="Points"
-                                     width=100
-                                     model="question.points" />
-
-                </mat-form-field>
-                <div class="Answers" ng-repeat="answer in question.answers">
-                    <mat-form-field>
-                        <input-component label="Answer"
-                                         width=700
-                                         model="answer.content" />
-                    </mat-form-field>
-                    <mat-form-field>
-                        <checkbox-component label="Correct answer" checked="answer.correct" model="answer.correct"></checkbox-component>
-                    </mat-form-field>
-                </div>
-            </div>
-            <p>
-                <mat-form-field>
-                    <primary-button-component id="saveAndSubmit" text="Save and Submit" ng-click="saveAndSubmit()"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="cancel" text="Cancel" ng-click="cancel()"></primary-button-component>
-                </mat-form-field>
-            </p>
-        </form>
+            <mat-form-field>
+                <input-component label="Wrong Answer Penalty (%)"
+                                 width=170
+                                 model="model.penalty " />
+            </mat-form-field>
+        </div>
+        <p>
+            <mat-form-field>
+                <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
+            </mat-form-field>
+            <mat-form-field>
+                <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
+            </mat-form-field>
+            <mat-form-field>
+                <primary-button-component id="beginTestBtn" text="Begin Test" ng-click="beginTest()"></primary-button-component>
+            </mat-form-field>
+        </p>
     </div>
 </div>

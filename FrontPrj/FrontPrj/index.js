@@ -36,8 +36,11 @@ require('@components/all.js');
 require('angular-ui-router');
 require('ui-router-extras');
 require('@pages/create-test/create-test.js');
+require('@pages/start-test/start-test.js');
 require('@pages/admin/admin.js');
 require('@root/src/services/create-test.service.js');
 require('@root/src/services/entities.service.js');
+require('@root/src/services/start-test.service.js');
+
 
 

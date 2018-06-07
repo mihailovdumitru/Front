@@ -70,6 +70,7 @@
     <Content Include="src\pages\admin\admin.template.html" />
     <Content Include="src\services\create-test.service.js" />
     <Content Include="src\services\entities.service.js" />
+    <Content Include="src\services\start-test.service.js" />
     <Content Include="webpack.config.js" />
     <None Include="packages.config" />
     <Content Include="index.js" />

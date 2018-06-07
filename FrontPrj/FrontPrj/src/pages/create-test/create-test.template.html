@@ -62,7 +62,12 @@
         <form>
             <div id="selectors">
                 <mat-form-field>
-                    <dropdown-component id="lecture" data="1" name="Lecture" width="150"></dropdown-component>
+                    <dropdown-component id="lecture" 
+                                        data="dropDownLectures" 
+                                        option="model.lectureID" 
+                                        name="Lecture" 
+                                        width="300">
+                    </dropdown-component>
                 </mat-form-field>
                 <mat-form-field>
                     <input-component label="Test naming"

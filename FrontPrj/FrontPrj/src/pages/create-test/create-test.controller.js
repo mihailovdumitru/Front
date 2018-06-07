@@ -4,7 +4,7 @@ const CONTROLLER_NAME = 'CreateTestController';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$scope', '$location','$route', 'createTestService', ($scope, $location,$route, createTestService) => {
+    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', 'createTestService', 'startTestService', ($scope, $location, $route, createTestService, startTestService) => {
         var ctrl = $scope;
         ctrl.model = [];
         ctrl.model.questions = [];
@@ -22,6 +22,23 @@ angular
             ctrl.model.answers.push({ content: "", correct: false });
             ctrl.model.lecture = "PSBD";
         }
+
+        ctrl.getLectures = function () {
+            startTestService.getLectures().then(function (response) {
+                if (response.data) {
+                    ctrl.dropDownLectures = [];
+                    ctrl.lectures = response.data;
+                    for (var element of ctrl.lectures) {
+                        var lecture = element;
+                        lecture.value = element.lectureID;
+                        lecture.text = element.name;
+                        ctrl.dropDownLectures.push(lecture);
+                    }
+                }
+            });
+        };
+
+        ctrl.getLectures();
 
         ctrl.save = function () {
             console.log(ctrl.model.question);
@@ -49,7 +66,7 @@ angular
 
         ctrl.saveAndSubmit = function () {
             test.naming = ctrl.model.testNaming;
-            test.lecture = ctrl.model.lecture;
+            test.lectureID = ctrl.model.lectureID;
             test.questions = ctrl.model.questions;
             createTestService.insertTest(test);
         }
