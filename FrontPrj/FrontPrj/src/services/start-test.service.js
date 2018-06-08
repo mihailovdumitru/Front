@@ -15,22 +15,21 @@ angular.module('app')
                 return $http.get(beginTestBaseUrl + "Tests");
             }
 
-            service.generateHashCodes = function (classID) {
-                return $http.put(beginTestBaseUrl + "HashCodesForStudents", classID);
-            }
-
             service.generateFileWithHashCodes = function (classID) {
                 return $http.post(beginTestBaseUrl + "GenerateFileWithHashCodes", classID);
             }
 
+            service.addTestParams = function (testParams) {
+                return $http.post(beginTestBaseUrl + "AddTestParameters", testParams);
+            }
+
+
+
             service.downloadFile = function (filename, fileContent) {
-                //this array of bytes was added at the start of the file to specify byte order mark(BOM)
                 var blob = new Blob([fileContent], {
                     encoding: "UTF-8",
                     type: 'text/html'
                 });
-
-                debugger
 
                 if (window.navigator.msSaveOrOpenBlob) { // For IE
                     navigator.msSaveBlob(blob, filename + '.txt');

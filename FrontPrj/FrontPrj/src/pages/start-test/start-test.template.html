@@ -6,19 +6,19 @@
         <div id="selectors">
             <dropdown-component id="lecture"
                                 data="dropDownLectures"
-                                option="model.lectureID"
+                                option="testParams.lectureID"
                                 name="Lecture"
                                 width="300">
             </dropdown-component>
             <dropdown-component id="test"
                                 data="dropDownTests"
-                                option="model.testID"
+                                option="testParams.testID"
                                 name="Test"
                                 width="300">
             </dropdown-component>
             <dropdown-component id="class"
                                 data="dropDownStudyClasses"
-                                option="model.classID"
+                                option="testParams.classID"
                                 name="Class"
                                 width="150">
             </dropdown-component>
@@ -28,12 +28,12 @@
             <mat-form-field>
                 <input-component label="Duration (min)"
                                  width=100
-                                 model="model.duration" />
+                                 model="testParams.duration" />
             </mat-form-field>
             <mat-form-field>
                 <input-component label="Wrong Answer Penalty (%)"
                                  width=170
-                                 model="model.penalty " />
+                                 model="testParams.penalty " />
             </mat-form-field>
         </div>
         <p>

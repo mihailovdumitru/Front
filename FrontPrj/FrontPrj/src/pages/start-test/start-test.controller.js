@@ -10,10 +10,11 @@ angular
         ctrl.model = [];
         ctrl.model.questions = [];
         ctrl.showQuestion = true;
-
+        var selectedLecture = {};
         init();
 
         function init() {
+            ctrl.testParams = {};
             ctrl.model.question = "";
             ctrl.model.points = 0;
             ctrl.model.answers = [];
@@ -22,9 +23,9 @@ angular
             ctrl.dropdownTestsAll = [];
         }
 
-        $scope.$watch('model.lectureID', function (newValue, oldValue) {
+        $scope.$watch('testParams.lectureID', function (newValue, oldValue) {
             if (newValue != null && newValue != oldValue) {
-                var selectedLecture = ctrl.lectures.filter(lecture => lecture.lectureID == newValue)[0];
+                selectedLecture = ctrl.lectures.filter(lecture => lecture.lectureID == newValue)[0];
                 var yearOfStudy = parseInt(selectedLecture.yearOfStudy);
                 ctrl.dropDownStudyClasses = ctrl.studyClasses.filter
                     (studyClass => (parseInt(studyClass.name.toString().charAt(1)) == yearOfStudy));
@@ -88,19 +89,23 @@ angular
 
 
         ctrl.beginTest = function () {
-            startTestService.generateHashCodes(ctrl.model.classID).then(function (response) {
-                if (response.data) {
-                    var generated = response.data;
-                    if (generated == true) {
-                        startTestService.generateFileWithHashCodes(ctrl.model.classID)
-                            .then(function (response) {
-                                if (response.data) {
-                                    startTestService.downloadFile('Dima', response.data);
-                                }
-                            })
+            startTestService.generateFileWithHashCodes(ctrl.testParams.classID)
+                .then(function (response) {
+                    if (response.data) {
+                        var currentdate = new Date();
+                        var className = ctrl.dropDownStudyClasses.filter(studyClass => studyClass.classID.toString() == ctrl.testParams.classID)[0].name;
+                        var filename = selectedLecture.name + "_" + className + "_" + currentdate.getDate() +
+                            "_" + (currentdate.getMonth() + 1) + "_" + currentdate.getFullYear();
+
+                        startTestService.downloadFile(filename, response.data);
+                        init();
+                        ctrl.getLectures();
+                        ctrl.getStudyClasses();
+                        ctrl.getTests();
                     }
-                }
-            });
+                });
+            startTestService.addTestParams(ctrl.testParams);
+
         };
 
 
@@ -113,8 +118,7 @@ angular
 
 
 
-
-
+    
 
 
         ctrl.save = function () {
