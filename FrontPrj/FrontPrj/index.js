@@ -20,6 +20,9 @@ import '@root/node_modules/angular-messages/angular-messages.js';
 import '@root/node_modules/trix/dist/trix.js';
 import '@root/src/app.constants.js';
 
+
+
+
 angular
     .module('app', [
         'constants',
@@ -34,13 +37,16 @@ angular
 
 require('@components/all.js');
 require('angular-ui-router');
+require('@root/node_modules/angular-crypto-js/angular-crypto-js.js');
 require('ui-router-extras');
 require('@pages/create-test/create-test.js');
 require('@pages/start-test/start-test.js');
+require('@pages/login/login.js');
 require('@pages/admin/admin.js');
 require('@root/src/services/create-test.service.js');
 require('@root/src/services/entities.service.js');
 require('@root/src/services/start-test.service.js');
+require('@root/src/services/auth.service.js');
 
 
 

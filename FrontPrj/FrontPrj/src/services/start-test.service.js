@@ -3,9 +3,11 @@
 const SERVICE_NAME = 'startTestService';
 
 angular.module('app')
-    .factory(SERVICE_NAME, ['$http', '$state', 'createTestBaseUrl', 'apiBaseUrl','beginTestBaseUrl',
-        function ($http, $state, createTestBaseUrl, apiBaseUrl,beginTestBaseUrl) {
+    .factory(SERVICE_NAME, ['$http', '$state', '$cookies', 'createTestBaseUrl', 'apiBaseUrl','beginTestBaseUrl',
+        function ($http, $state, $cookies, createTestBaseUrl, apiBaseUrl,beginTestBaseUrl) {
             var service = {};
+            var token = $cookies.get("token");
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + token;
 
             service.getLectures = function () {
                 return $http.get(beginTestBaseUrl + "TeacherLectures");
@@ -22,7 +24,6 @@ angular.module('app')
             service.addTestParams = function (testParams) {
                 return $http.post(beginTestBaseUrl + "AddTestParameters", testParams);
             }
-
 
 
             service.downloadFile = function (filename, fileContent) {

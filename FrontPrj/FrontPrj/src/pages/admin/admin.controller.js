@@ -2,10 +2,12 @@
 import { debug } from 'util';
 
 const CONTROLLER_NAME = 'AdminController';
+import jwt_decode from 'jwt-decode';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$window', '$scope', '$location', '$route', 'createTestService', 'entitiesService', ($window, $scope, $location, $route, createTestService, entitiesService) => {
+    .controller(CONTROLLER_NAME, ['$window', '$scope', '$location', '$route',  'createTestService', 'entitiesService', 'authService',
+        ($window, $scope, $location, $route, createTestService, entitiesService, authService) => {
         var ctrl = $scope;
         ctrl.model = [];
         ctrl.response = "";
@@ -29,6 +31,8 @@ angular
         { value: 2, text: "2" },
         { value: 3, text: "3" },
         { value: 4, text: "4" }];
+
+        authService.validateUser("admin");
 
 
         init();
