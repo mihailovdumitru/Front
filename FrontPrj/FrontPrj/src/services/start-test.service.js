@@ -3,8 +3,8 @@
 const SERVICE_NAME = 'startTestService';
 
 angular.module('app')
-    .factory(SERVICE_NAME, ['$http', '$state', '$cookies', 'createTestBaseUrl', 'apiBaseUrl','beginTestBaseUrl',
-        function ($http, $state, $cookies, createTestBaseUrl, apiBaseUrl,beginTestBaseUrl) {
+    .factory(SERVICE_NAME, ['$http', '$state', '$cookies', 'createTestBaseUrl', 'apiBaseUrl', 'beginTestBaseUrl', 'studentBeginTestUrl',
+        function ($http, $state, $cookies, createTestBaseUrl, apiBaseUrl, beginTestBaseUrl, studentBeginTestUrl) {
             var service = {};
             var token = $cookies.get("token");
             $http.defaults.headers.common['Authorization'] = 'Basic ' + token;
@@ -24,6 +24,33 @@ angular.module('app')
             service.addTestParams = function (testParams) {
                 return $http.post(beginTestBaseUrl + "AddTestParameters", testParams);
             }
+
+            service.getStudentTest = function () {
+                return $http.get(studentBeginTestUrl + "StudentTest/GetTest");
+            }
+
+            service.getTestInfo = function () {
+                return $http.get(studentBeginTestUrl + "StudentTest/GetTestParams");
+            }
+
+
+            service.addTestsResults = function (testResults) {
+                return $http.post(studentBeginTestUrl + "StudentTest/PostTestsResults", testResults);
+            }
+
+            service.getTestsResults = function () {
+                return $http.get(studentBeginTestUrl + "StudentTest/GetTestsResults");
+            }
+
+
+            service.getFullTest = function () {
+                return $http.get(studentBeginTestUrl + "StudentTest/GetFullTest");
+            }
+
+            service.getTestParamsForTest = function (testID) {
+                return $http.get(studentBeginTestUrl + "StudentTest/GetTestParamsByTestID/" + testID);
+            }
+
 
 
             service.downloadFile = function (filename, fileContent) {

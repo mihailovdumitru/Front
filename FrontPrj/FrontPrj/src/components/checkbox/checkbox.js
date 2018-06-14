@@ -6,5 +6,5 @@ angular
     .module('app')
     .component('checkboxComponent', {
         template: require('@components/checkbox/checkbox-template.html'),
-        bindings: { label: '@', model: '='}
+        bindings: { label: '@', disable: '@', model: '='}
     })

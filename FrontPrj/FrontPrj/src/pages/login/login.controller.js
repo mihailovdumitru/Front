@@ -74,6 +74,9 @@ angular
                                 else if (decoded.content.Role == "admin" && expiryDate > (new Date())) {
                                     $location.path("/admin");
                                 }
+                                else if (decoded.content.Role == "student" && expiryDate > (new Date())) {
+                                    $location.path("/begin-test");
+                                }
                             }
                         }
                     });

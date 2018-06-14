@@ -6,5 +6,5 @@ angular
     .module('app')
     .component('inputComponent', {
         template: require('@components/input/input-template.html'),
-        bindings: { label: '@', width: '@', type: '@', model: '=' }
+        bindings: { label: '@', width: '@', type: '@', disable:'@', model: '=' }
     })

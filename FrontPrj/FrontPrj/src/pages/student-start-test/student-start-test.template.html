@@ -1,0 +1,173 @@
+﻿<div class="container">
+    <h1> {{test.naming}} </h1>
+    <div class="question" ng-if="!testFinished && !testFinishedForAllStudents">
+        <form>
+            <p>
+                <mat-form-field>
+                    <input-component label="Remaining"
+                                     width=65
+                                     disable="true"
+                                     model="studentTest.questions.length" />
+
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Total"
+                                     width=50
+                                     disable="true"
+                                     model="totalQuestions" />
+
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Remaining Time"
+                                     width=400
+                                     disable="true"
+                                     model="remainingTime.time" />
+
+                </mat-form-field>
+            </p>
+            <mat-form-field>
+                <input-component label="Question"
+                                 width=700
+                                 disable="true"
+                                 model="currentQuestion.question.content" />
+
+            </mat-form-field>
+            <mat-form-field>
+                <input-component label="Points"
+                                 width=50
+                                 disable="true"
+                                 model="currentQuestion.question.points" />
+
+            </mat-form-field>
+            <div class="Answers" ng-repeat="answer in currentQuestion.answers">
+
+                <mat-form-field>
+                    <input-component label="Please choose the answer"
+                                     width=700
+                                     disable="true"
+                                     model="answer.content" />
+                </mat-form-field>
+
+                <mat-form-field>
+                    <checkbox-component label="Correct answer" model="answer.correct"></checkbox-component>
+                </mat-form-field>
+            </div>
+            <p>
+                <mat-form-field>
+                    <primary-button-component id="later" text="Later" ng-click="nextQuestion()"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="submitAnswer" text="Submit" ng-click="submitAnswer()"></primary-button-component>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>
+    <div id="results" ng-if="testFinished">
+        <mat-form-field>
+            <input-component label="Correct Answers"
+                             width=150
+                             disable="true"
+                             model="testResultsStats.numberOfCorrectAnswers" />
+
+        </mat-form-field>
+        <mat-form-field>
+            <input-component label="Wrong Answers"
+                             width=150
+                             disable="true"
+                             model="testResultsStats.numberOfWrongAnswers" />
+
+
+        </mat-form-field>
+        <mat-form-field>
+            <input-component label="Unfilled Answers"
+                             width=150
+                             disable="true"
+                             model="testResultsStats.numberOfUnfilledAnswers" />
+        </mat-form-field>
+        <mat-form-field>
+            <input-component label="Points"
+                             width=150
+                             disable="true"
+                             model="testResultsStats.points" />
+        </mat-form-field>
+        <mat-form-field>
+            <input-component label="Mark"
+                             width=150
+                             disable="true"
+                             model="testResultsStats.mark" />
+        </mat-form-field>
+    </div>
+
+    <div class="TestPreview" ng-if="testFinishedForAllStudents">
+        <form>
+            <!--<div id="selectors">
+                <mat-form-field>
+                    <dropdown-component id="lecture"
+                                        data="dropDownLectures"
+                                        option="model.lectureID"
+                                        name="Lecture"
+                                        width="300">
+                    </dropdown-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Test naming"
+                                     width=350
+                                     model="model.testNaming" />
+                </mat-form-field>
+            </div>-->
+            <div class="Question" ng-repeat="question in test.questions">
+
+                <mat-form-field>
+                    <input-component label="Question"
+                                     width=700
+                                     disable="true"
+                                     model="question.question.content" />
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Points"
+                                     width=50
+                                     disable="true"
+                                     model="question.question.points" />
+
+                </mat-form-field>
+                <mat-form-field>
+                    <input-component label="Received points"
+                                     width=100
+                                     disable="true"
+                                     model="question.question.receivedPoints" />
+
+                </mat-form-field>
+                <div class="Answers" ng-repeat="answer in question.answers">
+                    <mat-form-field>
+                        <input-component label="Answer"
+                                         width=700
+                                         disable="true"
+                                         model="answer.content" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <checkbox-component label="Correct answer"
+                                            checked="answer.correct"
+                                            disable="true"
+                                            model="answer.correct">
+                        </checkbox-component>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <checkbox-component label="Result answer"
+                                            checked="answer.studentOption"
+                                            disable="true"
+                                            model="answer.studentOption">
+                        </checkbox-component>
+                    </mat-form-field>
+                </div>
+            </div>
+            <p>
+                <mat-form-field>
+                    <primary-button-component id="saveAndSubmit" text="Save and Submit" ng-click="saveAndSubmit()"></primary-button-component>
+                </mat-form-field>
+                <mat-form-field>
+                    <primary-button-component id="cancel" text="Cancel" ng-click="cancel()"></primary-button-component>
+                </mat-form-field>
+            </p>
+        </form>
+    </div>
+</div>

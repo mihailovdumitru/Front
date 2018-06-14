@@ -97,7 +97,7 @@ angular
                         var filename = selectedLecture.name + "_" + className + "_" + currentdate.getDate() +
                             "_" + (currentdate.getMonth() + 1) + "_" + currentdate.getFullYear();
 
-                        startTestService.downloadFile(filename, response.data);
+                        startTestService.downloadFile(filename, response.data.content);
                         init();
                         ctrl.getLectures();
                         ctrl.getStudyClasses();

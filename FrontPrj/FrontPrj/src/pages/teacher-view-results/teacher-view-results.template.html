@@ -1,0 +1,78 @@
+﻿<header-component></header-component>
+
+<div class="container">
+    <h1> View results </h1>
+    <div class="question" ng-show="showQuestion">
+        <div id="selectors">
+            <dropdown-component id="lecture"
+                                data="dropDownLectures"
+                                option="testParams.lectureID"
+                                name="Lecture"
+                                width="300">
+            </dropdown-component>
+            <dropdown-component id="test"
+                                data="dropDownTests"
+                                option="testParams.testID"
+                                name="Test"
+                                width="300">
+            </dropdown-component>
+            <dropdown-component id="class"
+                                data="dropDownStudyClasses"
+                                option="testParams.classID"
+                                name="Class"
+                                width="150">
+            </dropdown-component>
+
+        </div>
+
+        <div ng-show="showTable">
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Correct Answers</th>
+                    <th>Unfilled Answers</th>
+                    <th>Wrong Answers</th>
+                    <th>Points</th>
+                    <th>Mark</th>
+                </tr>
+                <tr ng-repeat="studentResult in studentsResults">
+                    <td>{{ studentResult.firstName}}</td>
+                    <td>{{ studentResult.lastName }}</td>
+                    <td>{{ studentResult.email }}</td>
+                    <td>{{ studentResult.nrOfCorrectAnswers }}</td>
+                    <td>{{ studentResult.nrOfUnfilledAnswers }}</td>
+                    <td>{{ studentResult.nrOfWrongAnswers }}</td>
+                    <td>{{ studentResult.points }}</td>
+                    <td>{{ studentResult.mark }}</td>
+                </tr>
+            </table>
+        </div>
+
+
+        <!--<div>
+        <mat-form-field>
+            <input-component label="Duration (min)"
+                             width=100
+                             model="testParams.duration" />
+        </mat-form-field>
+        <mat-form-field>
+            <input-component label="Wrong Answer Penalty (%)"
+                             width=170
+                             model="testParams.penalty " />
+        </mat-form-field>
+    </div>-->
+        <p>
+            <!--<mat-form-field>
+                <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
+            </mat-form-field>
+            <mat-form-field>
+                <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
+            </mat-form-field>-->
+            <mat-form-field>
+                <primary-button-component id="viewResultsButton" text="View Results" ng-click="viewTestResults()"></primary-button-component>
+            </mat-form-field>
+        </p>
+    </div>
+</div>
