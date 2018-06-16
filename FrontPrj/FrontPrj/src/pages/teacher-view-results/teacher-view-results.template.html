@@ -1,8 +1,8 @@
-﻿<header-component></header-component>
+﻿<header-component teacherrole="true"></header-component>
 
 <div class="container">
     <h1> View results </h1>
-    <div class="question" ng-show="showQuestion">
+    <div class="results">
         <div id="selectors">
             <dropdown-component id="lecture"
                                 data="dropDownLectures"
@@ -49,27 +49,7 @@
                 </tr>
             </table>
         </div>
-
-
-        <!--<div>
-        <mat-form-field>
-            <input-component label="Duration (min)"
-                             width=100
-                             model="testParams.duration" />
-        </mat-form-field>
-        <mat-form-field>
-            <input-component label="Wrong Answer Penalty (%)"
-                             width=170
-                             model="testParams.penalty " />
-        </mat-form-field>
-    </div>-->
         <p>
-            <!--<mat-form-field>
-                <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
-            </mat-form-field>
-            <mat-form-field>
-                <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
-            </mat-form-field>-->
             <mat-form-field>
                 <primary-button-component id="viewResultsButton" text="View Results" ng-click="viewTestResults()"></primary-button-component>
             </mat-form-field>

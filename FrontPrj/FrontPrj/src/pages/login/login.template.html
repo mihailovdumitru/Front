@@ -1,37 +1,46 @@
-﻿<div class="container">
-    <div>
-        <input-component label="Username"
-                         width=300
-                         model="person.username" />
-    </div>
+﻿<style type="text/css">
+    body {
+        background-image: url('../../images/login_back.jpg');
+    }
+</style>
 
-
-    <div>
-        <input-component ng-if="!newPwd" label="Password"
-                         width=300
-                         model="person.password"
-                         required
-                         type="password" />
-
-    </div>
-    <div ng-if="newPwd">
+<div class="container">
+    <div class="login">
         <div>
-            <input-component label="New Password"
+            <input-component label="Username"
                              width=300
-                             model="person.newPassword"
+                             model="person.username" />
+        </div>
+
+        <div>
+            <input-component ng-if="!newPwd" label="Password"
+                             width=300
+                             model="person.password"
+                             required
                              type="password" />
 
         </div>
-        <div>
-            <input-component label="Retype New Password"
-                             width=300
-                             model="person.newPasswordRetyped"
-                             type="password" />
+        <div ng-if="newPwd">
+            <div>
+                <input-component label="New Password"
+                                 width=300
+                                 model="person.newPassword"
+                                 type="password" />
+
+            </div>
+            <div>
+                <input-component label="Retype New Password"
+                                 width=300
+                                 model="person.newPasswordRetyped"
+                                 type="password" />
+            </div>
         </div>
+        <!--<div ng-if="invalidPwd">Password doesnt match!</div>-->
+        <primary-button-component class="loginButton"
+                                  id="loginBtn"
+                                  text="Login"
+                                  ng-click="login()"
+                                  width=300>
+        </primary-button-component>
     </div>
-    <div ng-if="invalidPwd">Password doesnt match!</div>
-    <primary-button-component id="loginBtn"
-                              text="Login"
-                              ng-click="login()">
-    </primary-button-component>
 </div>

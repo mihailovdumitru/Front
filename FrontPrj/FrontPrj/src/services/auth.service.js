@@ -9,6 +9,10 @@ angular.module('app')
         function ($http, $state, $cookies, $location, authBaseUrl) {
             var service = {};
 
+            service.setToken = function () {
+                var token = $cookies.get("token");
+                $http.defaults.headers.common['Authorization'] = 'Basic ' + token;
+            }
 
             service.login = function (params) {
                 return $http.get(authBaseUrl + "Auth/Login", params);
@@ -24,7 +28,6 @@ angular.module('app')
                     var decoded = jwt_decode(token);
                     if (decoded.content.ExpiresAt == null || decoded.content.ExpiresAt < (new Date()) ||
                         decoded.content.Role == null || decoded.content.Role != role) {
-
                         $location.path("/login");
                     }
                 }

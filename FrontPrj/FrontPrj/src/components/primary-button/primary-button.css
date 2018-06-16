@@ -1,12 +1,13 @@
-#primary-button{
-  	border-radius: 4px;
-  	background-color: #0095cd;
-  	font-family: 'Source Sans Pro';
-  	font-size: 16px;
-  	color: white;
-  	line-height: 1.5;
-  	text-transform: none;
-  	font-weight: 600;
+#primary-button {
+    border-radius: 4px;
+    background-color: #0095cd;
+    font-family: 'Source Sans Pro';
+    font-size: 16px;
+    color: white;
+    line-height: 1.5;
+    text-transform: none;
+    font-weight: 600;
+    margin-left: 0px;
 }
 
 #primary-button:hover{

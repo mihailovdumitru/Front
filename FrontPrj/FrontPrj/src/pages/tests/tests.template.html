@@ -1,0 +1,68 @@
+﻿<header-component teacherrole="true"></header-component>
+
+<div class="container">
+    <h1> Tests </h1>
+    <div class="question" ng-show="showQuestion">
+        <div id="selectors">
+            <dropdown-component id="lecture"
+                                data="dropDownLectures"
+                                option="testParams.lectureID"
+                                name="Lecture"
+                                width="300">
+            </dropdown-component>
+            <dropdown-component id="test"
+                                data="dropDownTests"
+                                option="testParams.testID"
+                                name="Test"
+                                width="300">
+            </dropdown-component>
+        </div>
+
+        <div class="TestPreview">
+            <form>
+                <div class="Question" ng-repeat="question in test.questions">
+                    <mat-form-field>
+                        <textarea-component label="Question"
+                                            width=700
+                                            rows="1"
+                                            model="question.question.content" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <textarea-component label="Points"
+                                            width=50
+                                            rows="1"
+                                            model="question.question.points" />
+                    </mat-form-field>
+                    <div class="Answers" ng-repeat="answer in question.answers">
+                        <mat-form-field>
+                            <textarea-component label="Answer"
+                                                width=700
+                                                rows="1"
+                                                model="answer.content" />
+                        </mat-form-field>
+                        <mat-form-field>
+                            <checkbox-component label="Correct answer"
+                                                checked="answer.correct"
+                                                model="answer.correct">
+                            </checkbox-component>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <p>
+                    <mat-form-field>
+                        <primary-button-component id="viewResultsButton" 
+                                                  text="View" 
+                                                  ng-click="viewTestResults(testParams.testID)">
+                        </primary-button-component>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <primary-button-component id="viewResultsButton" 
+                                                  text="Save" 
+                                                  ng-click="save()">
+                        </primary-button-component>
+                    </mat-form-field>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

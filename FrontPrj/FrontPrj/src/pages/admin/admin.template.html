@@ -1,8 +1,7 @@
-﻿<header-component></header-component>
+﻿<header-component adminrole="true"></header-component>
 
 <div class="container" ng-controller="AdminController as ctrl">
-    <h1> Admin </h1>
-    <p>Selected Value: <span class="radioValue">{{ radio.selectedRadio }}</span> </p>
+    <h1> Dashboard </h1>
     <div layout="column" style="height:500px; " ng-cloak>
 
         <section layout="row" flex>
@@ -40,14 +39,13 @@
                         </dropdown-component>
                     </div>
                     <div class="StudentsDrop" ng-if="radio.selectedRadio=='Students'">
-                        <p>Selected Value: <span class="radioValue">{{ person.studentID }}</span> </p>
                         <dropdown-component id="studyClass"
                                             data="dropDownClasses"
                                             option="person.classID"
                                             name="Class"
                                             width="250"
                                             required>
-                        </dropdown-component><br/>
+                        </dropdown-component><br />
                         <dropdown-component ng-if="radio.selectedRadio=='Students'"
                                             id="student"
                                             data="dropDownStudents"
@@ -92,7 +90,6 @@
 
             <md-content flex layout-padding>
                 <div class="Teacher" layout="column" layout-align="top center" ng-if="(radio.selectedRadio=='Teachers') || (radio.selectedRadio=='Students')">
-                    <p>Selected Value: <span class="radioValue">{{ Lectures }}</span> </p>
                     <div>
                         <input-component label="First Name"
                                          width=250
@@ -122,7 +119,6 @@
 
 
                 <div class="Lectures" layout="column" layout-align="top center" ng-if="radio.selectedRadio=='Lectures'">
-                    <p>Selected Value: <span class="radioValue">{{ lecture.yearOfStudy }}</span> </p>
                     <div>
                         <input-component label="Name"
                                          width=250

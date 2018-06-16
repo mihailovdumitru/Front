@@ -7,24 +7,22 @@ const CONTROLLER_NAME = 'TeacherViewResultsController';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', 'createTestService', 'startTestService', 'entitiesService', 'teacherViewResultsService',
-        ($scope, $location, $route, createTestService, startTestService, entitiesService, teacherViewResultsService) => {
+    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', 'startTestService', 'entitiesService', 'teacherViewResultsService','authService',
+        ($scope, $location, $route,  startTestService, entitiesService, teacherViewResultsService, authService) => {
             var ctrl = $scope;
             ctrl.model = [];
-            ctrl.model.questions = [];
-            ctrl.showQuestion = true;
             ctrl.studentsResults = [];
             var selectedLecture = {};
             ctrl.showTable = false;
+
+            authService.setToken();
+
+            authService.validateUser("teacher");
+
             init();
 
             function init() {
                 ctrl.testParams = {};
-                ctrl.model.question = "";
-                ctrl.model.points = 0;
-                ctrl.model.answers = [];
-                ctrl.model.answers.push({ content: "", correct: "" });
-                ctrl.model.hashcodes = "";
                 ctrl.dropdownTestsAll = [];
             }
 
@@ -38,7 +36,7 @@ angular
                 }
             });
 
-            ctrl.teacherViewResultsService = function (testID,classID) {
+            ctrl.teacherViewResults = function (testID,classID) {
                 teacherViewResultsService.getTestResults(testID, classID).then(function (response) {
                     ctrl.showTable = false;
                     if (response.data && response.data != "") {
@@ -48,7 +46,6 @@ angular
                     else if (response.data == "") {
                         ctrl.studentsResults = [];
                     }
-                    //$scope.$apply();
                 });
             }
 
@@ -86,7 +83,6 @@ angular
                 });
             };
 
-
             ctrl.getLectures();
 
             ctrl.getStudyClasses = function () {
@@ -106,64 +102,9 @@ angular
 
             ctrl.getStudyClasses();
 
-
-            ctrl.beginTest = function () {
-                startTestService.generateFileWithHashCodes(ctrl.testParams.classID)
-                    .then(function (response) {
-                        if (response.data) {
-                            var currentdate = new Date();
-                            var className = ctrl.dropDownStudyClasses.filter(studyClass => studyClass.classID.toString() == ctrl.testParams.classID)[0].name;
-                            var filename = selectedLecture.name + "_" + className + "_" + currentdate.getDate() +
-                                "_" + (currentdate.getMonth() + 1) + "_" + currentdate.getFullYear();
-
-                            startTestService.downloadFile(filename, response.data.content);
-                            init();
-                            ctrl.getLectures();
-                            ctrl.getStudyClasses();
-                            ctrl.getTests();
-                        }
-                    });
-                startTestService.addTestParams(ctrl.testParams);
-
-            };
-
-
             ctrl.viewTestResults = function () {
-                ctrl.teacherViewResultsService(ctrl.testParams.testID, ctrl.testParams.classID);
+                ctrl.teacherViewResults(ctrl.testParams.testID, ctrl.testParams.classID);
             }
-
-            ctrl.save = function () {
-                console.log(ctrl.model.question);
-            }
-
-            ctrl.addAnswer = function () {
-                ctrl.model.answers.push({ content: "", correct: "" });
-            }
-
-            ctrl.addQuestion = function (question, answers, points) {
-                ctrl.model.questions.push({ question: question, answers: answers, points: points });
-                init();
-            }
-
-            ctrl.showPreview = function () {
-                ctrl.showQuestion = false;
-                console.log(ctrl.model.questions);
-            }
-
-            ctrl.saveAndSubmit = function () {
-                console.log(ctrl.model);
-            }
-
-            ctrl.cancel = function () {
-                $route.reload();
-            }
-
-            $scope.showPopup = function () {
-                angular.element(document.querySelector('.popup'))[0].style.display = "block";
-            }
-
-            createTestService.getUserInfoForUserId();
-
 
         }]);
 

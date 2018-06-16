@@ -9,7 +9,7 @@ const CONTROLLER_NAME = require('@pages/create-test/create-test.controller.js');
         .config(function ($locationProvider, $routeProvider) {
             $locationProvider.html5Mode(true);
             $routeProvider
-                .when('/', {
+                .when('/create', {
                     template: require('@pages/create-test/create-test.template.html'),
                     controller: CONTROLLER_NAME
                 });

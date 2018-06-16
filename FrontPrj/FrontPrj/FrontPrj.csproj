@@ -45,7 +45,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="src\app.constants.js" />
-    <Content Include="src\auth\angularJsOAuth2.js" />
     <Content Include="src\components\checkbox\checkbox-template.html" />
     <Content Include="src\components\checkbox\checkbox.css" />
     <Content Include="src\components\checkbox\checkbox.js" />
@@ -81,11 +80,15 @@
     <Content Include="src\pages\teacher-view-results\teacher-view-results.css" />
     <Content Include="src\pages\teacher-view-results\teacher-view-results.js" />
     <Content Include="src\pages\teacher-view-results\teacher-view-results.template.html" />
+    <Content Include="src\pages\tests\tests.controller.js" />
+    <Content Include="src\pages\tests\tests.css" />
+    <Content Include="src\pages\tests\tests.js" />
+    <Content Include="src\pages\tests\tests.template.html" />
     <Content Include="src\services\auth.service.js" />
     <Content Include="src\services\create-test.service.js" />
     <Content Include="src\services\entities.service.js" />
     <Content Include="src\services\start-test.service.js" />
-    <Content Include="src\services\teacher_view_results.service.js" />
+    <Content Include="src\services\teacher-view-results.service.js" />
     <Content Include="webpack.config.js" />
     <None Include="packages.config" />
     <Content Include="index.js" />
@@ -149,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="content\" />
-    <Folder Include="src\tests\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

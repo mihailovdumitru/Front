@@ -3,9 +3,11 @@
 const SERVICE_NAME = 'entitiesService';
 
 angular.module('app')
-    .factory(SERVICE_NAME, ['$http', '$state', 'createTestBaseUrl', 'apiBaseUrl',
-        function ($http, $state, createTestBaseUrl, apiBaseUrl) {
+    .factory(SERVICE_NAME, ['$http', '$state', '$cookies', 'createTestBaseUrl', 'apiBaseUrl',
+        function ($http, $state, $cookies, createTestBaseUrl, apiBaseUrl) {
             var service = {};
+            //var token = $cookies.get("token");
+            //$http.defaults.headers.common['Authorization'] = 'Basic ' + token;
 
             service.insertLecture = function (lecture) {
                 return $http.post(apiBaseUrl + "Lectures", lecture);
@@ -74,13 +76,6 @@ angular.module('app')
             service.deleteTeacher = function (teacherID) {
                 return $http.delete(apiBaseUrl + "Teachers/" + teacherID);
             }
-
-
-
-
-            service.getUserInfoForUserId = function () {
-                console.log("Dima");
-            };
 
             return service;
         }

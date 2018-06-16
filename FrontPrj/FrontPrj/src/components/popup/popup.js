@@ -9,6 +9,3 @@ angular
         controller: CONTROLLER_NAME,
         template: require('@components/popup/popup-template.html')
     })
-
-require('../../images/close.png');
-require('../../images/popup-header.png');

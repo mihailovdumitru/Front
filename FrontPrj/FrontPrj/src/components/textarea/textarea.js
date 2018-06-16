@@ -6,5 +6,5 @@ angular
     .module('app')
     .component('textareaComponent', {
         template: require('@components/textarea/textarea-template.html'),
-        bindings: { label: '@', width: '@', rows:'@', model: '=' }
+        bindings: { label: '@', width: '@', rows:'@', disable:'@', model: '=' }
     })

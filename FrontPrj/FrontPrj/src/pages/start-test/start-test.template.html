@@ -1,8 +1,8 @@
-﻿<header-component></header-component>
+﻿<header-component teacherrole="true"></header-component>
 
 <div class="container">
     <h1> Start test </h1>
-    <div class="question" ng-show="showQuestion">
+    <div class="testParams">
         <div id="selectors">
             <dropdown-component id="lecture"
                                 data="dropDownLectures"
@@ -37,12 +37,6 @@
             </mat-form-field>
         </div>
         <p>
-            <mat-form-field>
-                <primary-button-component id="addAnswer" text="Add answer" ng-click="addAnswer()"></primary-button-component>
-            </mat-form-field>
-            <mat-form-field>
-                <primary-button-component id="testPreview" text="Test preview" ng-click="showPreview()"></primary-button-component>
-            </mat-form-field>
             <mat-form-field>
                 <primary-button-component id="beginTestBtn" text="Begin Test" ng-click="beginTest()"></primary-button-component>
             </mat-form-field>

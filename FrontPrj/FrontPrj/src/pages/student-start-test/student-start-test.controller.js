@@ -5,7 +5,7 @@ const CONTROLLER_NAME = 'StudentStartTestController';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', 'createTestService', 'startTestService', 'entitiesService', ($scope, $location, $route, createTestService, startTestService, entitiesService) => {
+    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', 'createTestService', 'startTestService', 'authService', ($scope, $location, $route, createTestService, startTestService, authService) => {
         var ctrl = $scope;
         ctrl.model = [];
         ctrl.test = [];
@@ -14,8 +14,8 @@ angular
         ctrl.currentQuestion = {};
         ctrl.result = [];
         init();
-        var testResult = {};
-        testResult.questions = [];
+        ctrl.testResult = {};
+        ctrl.testResult.questions = [];
         ctrl.totalQuestions = 0;
         ctrl.remainingTime = {};
         var finishTest = {};
@@ -29,10 +29,13 @@ angular
         ctrl.testPenalty = {};
 
 
+        authService.setToken();
+
+        authService.validateUser("student");
+
         function init() {
             ctrl.showQuestion = true;
         }
-
 
         function getData() {
             startTestService.getTestsResults().then(function (response) {
@@ -49,98 +52,90 @@ angular
                     startTestService.getTestInfo().then(function (response) {
                         if (response.data && response.data != "") {
                             var testParams = response.data;
-                            console.log(testParams);
                             finishTest = testParams.finishTest;
                             initializeClock(finishTest);
 
                             if (ctrl.receivedTestResults != null && (new Date(finishTest) > new Date(ctrl.receivedTestResults.testResultDate))) {
                                 ctrl.testFinished = true;
                             }
-
-                            if (!ctrl.testFinished || !ctrl.testFinishedForAllStudents) {
-                                startTestService.getStudentTest().then(function (response) {
-                                    if (response.data) {
-                                        var testFromDB = response.data;
-                                        ctrl.test = { testID: testFromDB.testID, lectureID: testFromDB.lectureID, naming: testFromDB.naming, teacherID: testFromDB.teacherID };
-                                        ctrl.studentTest.questions = shuffle(testFromDB.questions);
-                                        ctrl.currentQuestion = ctrl.studentTest.questions[0];
-                                        ctrl.currentQuestion.answers = shuffle(ctrl.currentQuestion.answers);
-                                        ctrl.totalQuestions = ctrl.studentTest.questions.length;
-                                    }
-                                });
-                            }
                         }
                         else {
-                            ctrl.testFinished = true;
-                            ctrl.testFinishedForAllStudents = true;
-                            var studentResults = JSON.parse(ctrl.receivedTestResults.answersResult);
-
-
-
-                            startTestService.getFullTest().then(function (response) {
-                                if (response.data) {
-                                    ctrl.test = response.data;
-                                    startTestService.getTestParamsForTest(ctrl.test.testID).then(function (response) {
-                                        if (response.data) {
-                                            ctrl.testPenalty = response.data.penalty;
-                                            console.log(response.data);
-                                            var wrongAnswer = false; 
-
-                                            for (var question of ctrl.test.questions) {
-                                                var questionRez = studentResults.filter(studentQuestionRez => studentQuestionRez.questionID == question.question.questionID)[0];
-                                                
-                                                for (var answer of question.answers) {
-                                                    if (questionRez.answers.includes(answer.answerID)) {
-                                                        answer.studentOption = true;
-                                                    }
-                                                    else {
-                                                        answer.studentOption = false;
-                                                    }
-                                                }
-                                                wrongAnswer = false;
-                                                if (questionRez.answers.length != 0) {
-                                                    for (var answer of question.answers) {
-                                                        if (answer.correct != answer.studentOption) {
-                                                            wrongAnswer = true;
-                                                            question.question.receivedPoints = 0 - (question.question.points * (ctrl.testPenalty/100));
-                                                            break;
-                                                        }
-                                                    }
-                                                    if (wrongAnswer == false)
-                                                        question.question.receivedPoints = question.question.points;
-                                                }
-                                                else {
-                                                    question.question.receivedPoints = 0;
-                                                }
-
-                                            }
-                                            console.log(ctrl.test);
-                                        }
-                                    });
-                                }
-                            });
+                            getResultWithAnswers();
                         }
                     });
                 }
                 else {
-                    startTestService.getStudentTest().then(function (response) {
-                        if (response.data) {
-                            var testFromDB = response.data;
-                            ctrl.test = { testID: testFromDB.testID, lectureID: testFromDB.lectureID, naming: testFromDB.naming, teacherID: testFromDB.teacherID };
-                            ctrl.studentTest.questions = shuffle(testFromDB.questions);
-                            ctrl.currentQuestion = ctrl.studentTest.questions[0];
-                            ctrl.currentQuestion.answers = shuffle(ctrl.currentQuestion.answers);
-                            ctrl.totalQuestions = ctrl.studentTest.questions.length;
+                    resolveTest();
+                }
+            });
+        }
+
+        function getResultWithAnswers() {
+            ctrl.testFinished = true;
+            ctrl.testFinishedForAllStudents = true;
+            var studentResults = JSON.parse(ctrl.receivedTestResults.answersResult);
+
+            startTestService.getFullTest().then(function (response) {
+                if (response.data) {
+                    ctrl.test = response.data;
+                    startTestService.getTestParamsForTest(ctrl.test.testID).then(function (response) {
+                        if (response.data != null && response.data != "") {
+                            ctrl.testPenalty = response.data.penalty;
+                            var wrongAnswer = false;
+
+                            for (var question of ctrl.test.questions) {
+                                var questionRez = studentResults.filter(studentQuestionRez => studentQuestionRez.questionID == question.question.questionID)[0];
+
+                                for (var answer of question.answers) {
+                                    if (questionRez.answers.includes(answer.answerID)) {
+                                        answer.studentOption = true;
+                                    }
+                                    else {
+                                        answer.studentOption = false;
+                                    }
+                                }
+                                wrongAnswer = false;
+                                if (questionRez.answers.length != 0) {
+                                    for (var answer of question.answers) {
+                                        if (answer.correct != answer.studentOption) {
+                                            wrongAnswer = true;
+                                            question.question.receivedPoints = 0 - (question.question.points * (ctrl.testPenalty / 100));
+                                            break;
+                                        }
+                                    }
+                                    if (wrongAnswer == false)
+                                        question.question.receivedPoints = question.question.points;
+                                }
+                                else {
+                                    question.question.receivedPoints = 0;
+                                }
+
+                            }
                         }
                     });
-                    startTestService.getTestInfo().then(function (response) {
-                        if (response.data) {
-                            var testParams = response.data;
-                            console.log(testParams);
-                            finishTest = testParams.finishTest;
-                            initializeClock(finishTest);
-                        }
-                    });
+                }
+            });
+        }
+
+        function resolveTest() {
+            startTestService.getStudentTest().then(function (response) {
+                if (response.data != null && response.data != "") {
+                    var testFromDB = response.data;
+                    ctrl.test = { testID: testFromDB.testID, lectureID: testFromDB.lectureID, naming: testFromDB.naming, teacherID: testFromDB.teacherID };
+                    ctrl.studentTest.questions = shuffle(testFromDB.questions);
+                    ctrl.currentQuestion = ctrl.studentTest.questions[0];
+                    ctrl.currentQuestion.answers = shuffle(ctrl.currentQuestion.answers);
+                    ctrl.totalQuestions = ctrl.studentTest.questions.length;
+                }
+                else if (response.data != null && response.data == "") {
+                    $location.path("/login");
+                }
+            });
+            startTestService.getTestInfo().then(function (response) {
+                if (response.data) {
+                    var testParams = response.data;
+                    finishTest = testParams.finishTest;
+                    initializeClock(finishTest);
                 }
             });
         }
@@ -149,23 +144,8 @@ angular
             startTestService.getTestInfo().then(function (response) {
                 if (response.data) {
                     var testParams = response.data;
-                    console.log(testParams);
                     finishTest = testParams.finishTest;
                     initializeClock(finishTest);
-                }
-            });
-        }
-
-        function GetTestStudent() {
-            startTestService.getStudentTest().then(function (response) {
-                if (response.data) {
-                    var testFromDB = response.data;
-                    ctrl.test = { testID: testFromDB.testID, lectureID: testFromDB.lectureID, naming: testFromDB.naming, teacherID: testFromDB.teacherID };
-                    ctrl.studentTest.questions = shuffle(testFromDB.questions);
-                    ctrl.currentQuestion = ctrl.studentTest.questions[0];
-                    ctrl.currentQuestion.answers = shuffle(ctrl.currentQuestion.answers);
-                    ctrl.totalQuestions = ctrl.studentTest.questions.length;
-
                 }
             });
         }
@@ -176,7 +156,6 @@ angular
             var question = ctrl.studentTest.questions.shift();
             ctrl.currentQuestion = ctrl.studentTest.questions[0];
             ctrl.studentTest.questions.push(question);
-            console.log(ctrl.studentTest.questions);
         }
 
         ctrl.submitAnswer = function () {
@@ -188,7 +167,7 @@ angular
                     question.answers.push(answer.answerID);
                 }
             }
-            testResult.questions.push(question);
+            ctrl.testResult.questions.push(question);
 
             ctrl.studentTest.questions.shift();
             ctrl.currentQuestion = ctrl.studentTest.questions[0];
@@ -198,7 +177,7 @@ angular
         }
 
         function submitTest() {
-            testResultsToSend = { testID: ctrl.test.testID, answersResult: JSON.stringify(testResult.questions) };
+            testResultsToSend = { testID: ctrl.test.testID, answersResult: JSON.stringify(ctrl.testResult.questions) };
             startTestService.addTestsResults(testResultsToSend).then(function (response) {
                 if (response.data) {
                     ctrl.testFinished = true;
@@ -243,8 +222,12 @@ angular
                 };
             }
             else {
-                if (ctrl.testResultsStats == null) {
+                if (Object.keys(ctrl.testResultsStats).length === 0 && ctrl.testResultsStats.constructor === Object) {
+                    for (var question of ctrl.studentTest.questions) {
+                        ctrl.testResult.questions.push({ questionID: question.question.questionID, answers: [] });
+                    }
                     submitTest();
+                    $location.path("/begin-test");
                 }
                 return "timeExpired";
             }

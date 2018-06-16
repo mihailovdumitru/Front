@@ -45,6 +45,7 @@ require('@root/node_modules/angular-crypto-js/angular-crypto-js.js');
 require('@pages/create-test/create-test.js');
 require('@pages/student-start-test/student-start-test.js');
 require('@pages/teacher-view-results/teacher-view-results.js');
+require('@pages/tests/tests.js');
 require('@pages/start-test/start-test.js');
 require('@pages/login/login.js');
 require('@pages/admin/admin.js');
@@ -53,7 +54,7 @@ require('@root/src/services/create-test.service.js');
 require('@root/src/services/entities.service.js');
 require('@root/src/services/start-test.service.js');
 require('@root/src/services/auth.service.js');
-require('@root/src/services/teacher_view_results.service.js');
+require('@root/src/services/teacher-view-results.service.js');
 
 
 

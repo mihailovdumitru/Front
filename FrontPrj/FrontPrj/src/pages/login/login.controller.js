@@ -8,7 +8,7 @@ import jwt_decode from 'jwt-decode';
 
 angular
     .module('app')
-    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', '$cookies','defaultPassword', 'authService', ($scope, $location, $route, $cookies, defaultPassword, authService) => {
+    .controller(CONTROLLER_NAME, ['$scope', '$location', '$route', '$cookies', 'defaultPassword', 'authService', ($scope, $location, $route, $cookies, defaultPassword, authService) => {
         var ctrl = $scope;
         ctrl.person = {};
         ctrl.model = [];
@@ -35,14 +35,15 @@ angular
 
 
         ctrl.login = function () {
+            $cookies.remove("token");
             var passwordHash = getHashForString(ctrl.person.password);
             defaultHashPwd = getHashForString(defaultPassword);
 
             if (ctrl.newPwd || (passwordHash == defaultHashPwd)) {
-                ctrl.newPwd = true;
-                if (ctrl.person.newPassword == null || ctrl.person.newPassword != ctrl.person.newPasswordRetyped) {
-                    ctrl.invalidPwd = true;
 
+                ctrl.newPwd = true;
+                if ((ctrl.person.newPassword == null || ctrl.person.newPassword != ctrl.person.newPasswordRetyped)) {
+                    ctrl.invalidPwd = true;
                 }
                 else {
                     ctrl.invalidPwd = false;
@@ -51,18 +52,15 @@ angular
                 }
             }
             else {
-                params = { headers: { username: ctrl.person.username, password: passwordHash} };
+                params = { headers: { username: ctrl.person.username, password: passwordHash } };
             }
-
             if (ctrl.invalidPwd == false) {
                 authService.login(params)
                     .then(function (response) {
                         if (response.data) {
-                            console.log(response.data);
                             if (response.data != " ") {
                                 var decoded = jwt_decode(response.data);
                                 $cookies.put("token", response.data);
-                                var cookieData = $cookies.get("token");
                                 var expiryDate = {};
                                 if (decoded.content.ExpiresAt != null) {
                                     expiryDate = new Date(decoded.content.ExpiresAt);
@@ -81,14 +79,6 @@ angular
                         }
                     });
             }
-
-
-            //var params = { headers: { username: ctrl.person.username, password: ctrl.person.password }};
-            //authService.GetToken(params).then(function (response) {
-            //    if (response.data) {
-            //        console.log(response.data);
-            //    }
-            //});
         }
 
 

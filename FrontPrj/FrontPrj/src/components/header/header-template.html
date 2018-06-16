@@ -1,44 +1,25 @@
-<div id="header" ng-controller="header-controller">
+<div id="header" ng-controller="header-controller as ctrl">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
             </div>
             <div class="col-md-8">
-                <div class="row">
-                    <div class="col-md-16">
-                        <md-menu-bar id="userPanel">
-                            <md-menu md-position-mode="target-right target" id="dropdown" md-offset="0 66">
-                                <div ng-click="$mdOpenMenu()" class='nofocus'>
-                                    <img id="user-icon" src="../../images/avatar.jpg">
-                                    <div id="welcomeText" class="defaultText">
-                                        <span>Welcome {{ currentUser }}</span>
-                                        <img class="arrow" ng-if="!$mdMenuIsOpen" src="../../images/down.png">
-                                        <img class="arrow" ng-if="$mdMenuIsOpen" src="../../images/up.png">
-                                    </div>
-                                </div>
-                                <md-menu-content width="4">
-                                    <md-menu-item class="item">
-                                        <div class="defaultText">View account</div>
-                                    </md-menu-item>
-                                    <md-menu-item class="item">
-                                        <div class="defaultText">Settings</div>
-                                    </md-menu-item>
-                                    <md-menu-item class="item">
-                                        <div class="defaultText" ng-click="logout()">Log out</div>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </md-menu-bar>
-                    </div>
-                </div>
                 <div class="row" id="nav">
                     <div class="col-md-16">
-                        <div id="navbar" class="defaultText">
-                            <a href="{{ dashboardRoute }}" ng-class="{ active: isActive('{{dashboardRoute}}')}">Dashboard</a>
-                            <a href="/" ng-class="{ active: isActive('/')}">Create Test</a>
+                        <div id="navbar" ng-show="{{$ctrl.teacherrole}}" class="defaultText">
                             <a href="/start" ng-class="{ active: isActive('/start')}">Start test</a>
-                            <a href="/results" ng-class="{ active: isActive('/results')}">Results</a>
-                            <a href="/about" ng-class="{ active: isActive('/about')}">About Test App</a>
+                            <a href="/create" ng-class="{ active: isActive('/create')}">Create Test</a>
+                            <a href="/tests" ng-class="{ active: isActive('/tests')}">Tests</a>
+                            <a href="/teacher-view-results" ng-class="{ active: isActive('/teacher-view-results')}">View results</a>
+                            <a href="#" ng-click="$event.preventDefault();logout()">Logout</a>
+                        </div>
+                        <div id="navbar" ng-show="{{$ctrl.adminrole}}" class="defaultText">
+                            <a href="/admin" ng-class="{ active: isActive('/admin')}">Dashboard</a>
+                            <a href="#" ng-click="$event.preventDefault();logout()">Logout</a>
+                        </div>
+                        <div id="navbar" ng-show="{{$ctrl.studentrole}}" class="defaultText">
+                            <a href="/begin-test" ng-class="{ active: isActive('/begin-test')}">Test</a>
+                            <a href="#" ng-click="$event.preventDefault();logout()">Logout</a>
                         </div>
                     </div>
                 </div>

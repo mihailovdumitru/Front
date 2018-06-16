@@ -1,4 +1,5 @@
-﻿<div class="container">
+﻿<header-component studentrole="true"></header-component>
+<div class="container">
     <h1> {{test.naming}} </h1>
     <div class="question" ng-if="!testFinished && !testFinishedForAllStudents">
         <form>
@@ -26,26 +27,29 @@
                 </mat-form-field>
             </p>
             <mat-form-field>
-                <input-component label="Question"
-                                 width=700
-                                 disable="true"
-                                 model="currentQuestion.question.content" />
+                <textarea-component label="Question"
+                                    width=700
+                                    disable="true"
+                                    rows="1"
+                                    model="currentQuestion.question.content" />
 
             </mat-form-field>
             <mat-form-field>
-                <input-component label="Points"
-                                 width=50
-                                 disable="true"
-                                 model="currentQuestion.question.points" />
+                <textarea-component label="Points"
+                                    width=50
+                                    disable="true"
+                                    rows="1"
+                                    model="currentQuestion.question.points" />
 
             </mat-form-field>
             <div class="Answers" ng-repeat="answer in currentQuestion.answers">
 
                 <mat-form-field>
-                    <input-component label="Please choose the answer"
-                                     width=700
-                                     disable="true"
-                                     model="answer.content" />
+                    <textarea-component label="Please choose the answer"
+                                        width=700
+                                        disable="true"
+                                        rows="1"
+                                        model="answer.content" />
                 </mat-form-field>
 
                 <mat-form-field>
@@ -100,49 +104,38 @@
 
     <div class="TestPreview" ng-if="testFinishedForAllStudents">
         <form>
-            <!--<div id="selectors">
-                <mat-form-field>
-                    <dropdown-component id="lecture"
-                                        data="dropDownLectures"
-                                        option="model.lectureID"
-                                        name="Lecture"
-                                        width="300">
-                    </dropdown-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <input-component label="Test naming"
-                                     width=350
-                                     model="model.testNaming" />
-                </mat-form-field>
-            </div>-->
             <div class="Question" ng-repeat="question in test.questions">
 
                 <mat-form-field>
-                    <input-component label="Question"
-                                     width=700
-                                     disable="true"
-                                     model="question.question.content" />
+                    <textarea-component label="Question"
+                                        width=700
+                                        disable="true"
+                                        rows="1"
+                                        model="question.question.content" />
                 </mat-form-field>
                 <mat-form-field>
-                    <input-component label="Points"
-                                     width=50
-                                     disable="true"
-                                     model="question.question.points" />
+                    <textarea-component label="Points"
+                                        width=50
+                                        disable="true"
+                                        rows="1"
+                                        model="question.question.points" />
 
                 </mat-form-field>
                 <mat-form-field>
-                    <input-component label="Received points"
-                                     width=100
-                                     disable="true"
-                                     model="question.question.receivedPoints" />
+                    <textarea-component label="Received points"
+                                        width=100
+                                        disable="true"
+                                        rows="1"
+                                        model="question.question.receivedPoints" />
 
                 </mat-form-field>
                 <div class="Answers" ng-repeat="answer in question.answers">
                     <mat-form-field>
-                        <input-component label="Answer"
-                                         width=700
-                                         disable="true"
-                                         model="answer.content" />
+                        <textarea-component label="Answer"
+                                            width=700
+                                            disable="true"
+                                            rows="1"
+                                            model="answer.content" />
                     </mat-form-field>
                     <mat-form-field>
                         <checkbox-component label="Correct answer"
@@ -160,14 +153,6 @@
                     </mat-form-field>
                 </div>
             </div>
-            <p>
-                <mat-form-field>
-                    <primary-button-component id="saveAndSubmit" text="Save and Submit" ng-click="saveAndSubmit()"></primary-button-component>
-                </mat-form-field>
-                <mat-form-field>
-                    <primary-button-component id="cancel" text="Cancel" ng-click="cancel()"></primary-button-component>
-                </mat-form-field>
-            </p>
         </form>
     </div>
 </div>

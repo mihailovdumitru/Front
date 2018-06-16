@@ -1,4 +1,4 @@
-<md-input-container class="md-block">
+<md-input-container>
     <label>{{ $ctrl.label }}</label>
-    <textarea ng-style="{width: {{$ctrl.width}} + 'px'}" rows={{$ctrl.rows}}  ng-model=$ctrl.model md-select-on-focus></textarea>
+    <textarea ng-style="{width: {{$ctrl.width}} + 'px'}" ng-disabled="{{$ctrl.disable}}" rows={{$ctrl.rows}}  ng-model=$ctrl.model md-select-on-focus></textarea>
 </md-input-container>
