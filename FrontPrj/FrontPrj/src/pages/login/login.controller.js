@@ -17,6 +17,7 @@ angular
         var params = {};
         var newPassword = "";
         var defaultHashPwd = "";
+        ctrl.invalidAuth = false;
 
         init();
         function init() {
@@ -77,6 +78,8 @@ angular
                                 }
                             }
                         }
+
+                        ctrl.invalidAuth = true;
                     });
             }
         }

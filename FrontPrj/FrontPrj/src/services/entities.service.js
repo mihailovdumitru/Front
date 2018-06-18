@@ -6,8 +6,6 @@ angular.module('app')
     .factory(SERVICE_NAME, ['$http', '$state', '$cookies', 'createTestBaseUrl', 'apiBaseUrl',
         function ($http, $state, $cookies, createTestBaseUrl, apiBaseUrl) {
             var service = {};
-            //var token = $cookies.get("token");
-            //$http.defaults.headers.common['Authorization'] = 'Basic ' + token;
 
             service.insertLecture = function (lecture) {
                 return $http.post(apiBaseUrl + "Lectures", lecture);

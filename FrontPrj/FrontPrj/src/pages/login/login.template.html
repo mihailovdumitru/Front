@@ -35,7 +35,7 @@
                                  type="password" />
             </div>
         </div>
-        <!--<div ng-if="invalidPwd">Password doesnt match!</div>-->
+        <div class="errorMessage" ng-if="invalidAuth">Invalid credentials!</div>
         <primary-button-component class="loginButton"
                                   id="loginBtn"
                                   text="Login"

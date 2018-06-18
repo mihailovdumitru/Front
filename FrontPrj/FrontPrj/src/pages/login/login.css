@@ -11,3 +11,7 @@
 .loginButton {
     margin-left:0px;
 }
+
+.errorMessage{
+    color:red;
+}

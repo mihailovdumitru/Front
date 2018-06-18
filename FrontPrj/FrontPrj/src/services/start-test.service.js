@@ -6,10 +6,6 @@ angular.module('app')
     .factory(SERVICE_NAME, ['$http', '$state', '$cookies', 'createTestBaseUrl', 'apiBaseUrl', 'beginTestBaseUrl', 'studentBeginTestUrl',
         function ($http, $state, $cookies, createTestBaseUrl, apiBaseUrl, beginTestBaseUrl, studentBeginTestUrl) {
             var service = {};
-            //var token = $cookies.get("token");
-            //$http.defaults.headers.common['Authorization'] = 'Basic ' + token;
-
-
 
             service.getLectures = function () {
                 return $http.get(beginTestBaseUrl + "TeacherLectures");
